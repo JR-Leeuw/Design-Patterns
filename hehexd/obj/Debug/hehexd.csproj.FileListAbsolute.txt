@@ -1,0 +1,15 @@
+C:\Users\lhmbe\OneDrive\Documenten\GitHub\Design-Patterns\hehexd\bin\Debug\hehexd.exe.config
+C:\Users\lhmbe\OneDrive\Documenten\GitHub\Design-Patterns\hehexd\bin\Debug\hehexd.exe
+C:\Users\lhmbe\OneDrive\Documenten\GitHub\Design-Patterns\hehexd\bin\Debug\hehexd.pdb
+C:\Users\lhmbe\OneDrive\Documenten\GitHub\Design-Patterns\hehexd\obj\Debug\hehexd.csprojAssemblyReference.cache
+C:\Users\lhmbe\OneDrive\Documenten\GitHub\Design-Patterns\hehexd\obj\Debug\MainWindow.g.cs
+C:\Users\lhmbe\OneDrive\Documenten\GitHub\Design-Patterns\hehexd\obj\Debug\App.g.cs
+C:\Users\lhmbe\OneDrive\Documenten\GitHub\Design-Patterns\hehexd\obj\Debug\hehexd_MarkupCompile.cache
+C:\Users\lhmbe\OneDrive\Documenten\GitHub\Design-Patterns\hehexd\obj\Debug\hehexd_MarkupCompile.lref
+C:\Users\lhmbe\OneDrive\Documenten\GitHub\Design-Patterns\hehexd\obj\Debug\MainWindow.baml
+C:\Users\lhmbe\OneDrive\Documenten\GitHub\Design-Patterns\hehexd\obj\Debug\hehexd.g.resources
+C:\Users\lhmbe\OneDrive\Documenten\GitHub\Design-Patterns\hehexd\obj\Debug\hehexd.Properties.Resources.resources
+C:\Users\lhmbe\OneDrive\Documenten\GitHub\Design-Patterns\hehexd\obj\Debug\hehexd.csproj.GenerateResource.cache
+C:\Users\lhmbe\OneDrive\Documenten\GitHub\Design-Patterns\hehexd\obj\Debug\hehexd.csproj.CoreCompileInputs.cache
+C:\Users\lhmbe\OneDrive\Documenten\GitHub\Design-Patterns\hehexd\obj\Debug\hehexd.exe
+C:\Users\lhmbe\OneDrive\Documenten\GitHub\Design-Patterns\hehexd\obj\Debug\hehexd.pdb
