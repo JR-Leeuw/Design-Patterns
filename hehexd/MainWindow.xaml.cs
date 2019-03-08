@@ -22,7 +22,7 @@ namespace hehexd
     {
         public enum MyShape
         {
-            Line, Ellipse, Rectangle, Selecter, Deleter, Drag
+            Line, Ellipse, Rectangle, Selecter, Deleter, Drag, Resize
         }
 
         private MyShape currShape = MyShape.Line;
@@ -64,8 +64,15 @@ namespace hehexd
             currShape = MyShape.Drag;
         }
 
+        private void ResizeButton_Click(object sender, RoutedEventArgs e)
+        {
+            currShape = MyShape.Resize;
+        }
+
         Point start;
         Point end;
+        int currentobj = -1;
+        bool move = false;
 
         private void Shapeprinter()
         {
@@ -87,6 +94,10 @@ namespace hehexd
                     Select("del");
                     break;
                 case MyShape.Drag:
+                    Select("move");
+                    break;
+                case MyShape.Resize:
+                    Select("Rs");
                     break;
                 default:
                     return;
@@ -95,7 +106,10 @@ namespace hehexd
 
         private void MyCanvas_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            end = start;
             start = e.GetPosition(this);
+            currentobj = -1;
+            move = false;
         }
 
         private void MyCanvas_MouseUp(object sender, MouseButtonEventArgs e)
@@ -107,23 +121,30 @@ namespace hehexd
         {
             if(e.GetPosition(this) != end && e.LeftButton == MouseButtonState.Pressed)
             {
-                if (currShape != MyShape.Drag)
+                if (currShape != MyShape.Drag && currShape != MyShape.Resize)
                 {
                     end = e.GetPosition(this);
                     ShapeUpdate();
                     Shapeprinter();
                 }
-                else
+                else if(currShape == MyShape.Drag)
                 {
                     end = e.GetPosition(this);
-                    Drag();
+                    Select("move");
+                    Shapeprinter();
+                }
+                else if(currShape == MyShape.Resize)
+                {
+                    end = e.GetPosition(this);
+                    Select("Rs");
+                    //Shapeprinter();
                 }
             }
         }
 
         private void ShapeUpdate()
         {
-            if (MyCanvas.Children.Count > 0  && currShape != MyShape.Deleter && currShape != MyShape.Selecter && lastShape != MyShape.Selecter) 
+            if (MyCanvas.Children.Count > 0  && currShape != MyShape.Deleter && currShape != MyShape.Selecter && lastShape != MyShape.Selecter && lastShape != MyShape.Drag) 
             {   
                 MyCanvas.Children.RemoveAt(MyCanvas.Children.Count - 1);
             }
@@ -134,35 +155,6 @@ namespace hehexd
             MyCanvas.Children.Remove(child);
         }
 
-        private void Drag()
-        {
-            for (int i = MyCanvas.Children.Count - 1; i > -1; i--)
-            {
-                var child = MyCanvas.Children[i];
-                double posx = Convert.ToDouble(child.GetValue(Canvas.LeftProperty));
-                double posy = Convert.ToDouble(child.GetValue(Canvas.TopProperty));
-                //double post = Convert.ToDouble(child.GetValue(Canvas.property));
-                var size = child.RenderSize;
-                double hight = size.Height;
-                double width = size.Width;
-                double xfield = posx + width;
-                double yfield = posy + hight;
-
-                if (start.X > posx && start.X < xfield && start.Y - 50 > posy && start.Y - 50 < yfield)
-                {
-                    double nposx = start.X - end.X;
-                    double nposy = start.Y - end.Y;
-                    child.SetValue(Canvas.LeftProperty, posx - nposx);
-                    child.SetValue(Canvas.TopProperty, posy - nposy);
-                    //start.X = end.X - posx; start.Y = end.Y - posy;
-                    ////Remove(child);
-                    //DrawRectangle(Brushes.Black, Brushes.Black, 4, "g", i);
-                    ////ShapeUpdate();
-                    //Shapeprinter();
-                    //lastShape = currShape;
-                }
-            }
-        }
         private void Select(string msg)
         {
             {
@@ -193,6 +185,37 @@ namespace hehexd
                         {
                             Remove(child);
                             lastShape = currShape;
+                        }
+
+                        else if(msg == "move")
+                        {
+
+                            if ((start.X > posx && start.X < xfield && start.Y - 50 > posy && start.Y - 50 < yfield && move == false) || currentobj == i && move == true)
+                            {
+                                currentobj = i;
+                                move = true;
+                                double nposx = (start.X - end.X);
+                                double nposy = (start.Y - end.Y);
+                                child.SetValue(Canvas.LeftProperty, posx - nposx);
+                                child.SetValue(Canvas.TopProperty, posy - nposy);
+                                //child.SetValue(Canvas.StyleProperty, Brushes.Blue);
+                                start = end;
+                                lastShape = MyShape.Drag;
+                            }
+                        }
+
+                        else if(msg == "Rs")
+                        {
+                            if ((start.X > posx && start.X < xfield && start.Y - 50 > posy && start.Y - 50 < yfield && move == false) || currentobj == i && move == true)
+                            {
+                                double nposx = (start.X - end.X);
+                                double nposy = (start.Y - end.Y);
+                                child.SetValue(Canvas.WidthProperty, posx - nposx);
+                                child.SetValue(Canvas.HeightProperty, posy - nposy);
+                                //child.SetValue(Canvas.StyleProperty, Brushes.Blue);
+                                //start = end;
+                                lastShape = MyShape.Resize;
+                            }
                         }
                         break;
                     }

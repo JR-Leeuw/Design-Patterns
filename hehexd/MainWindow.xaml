@@ -17,6 +17,8 @@
             <RadioButton Name="SelectButton" Content="Select" GroupName="ShapeGroup" Click="SelectButton_Click"/>
             <RadioButton Name="DeleteButton" Content="Delete" GroupName="ShapeGroup" Click="DeleteButton_Click"/>
             <RadioButton Name="DragButton" Content="Drag" GroupName="ShapeGroup" Click="DragButton_Click"/>
+            <RadioButton Name="ResizeButton" Content="Resize" GroupName="ShapeGroup" Click="ResizeButton_Click"/>
+            
             
         </ToolBar>
 
