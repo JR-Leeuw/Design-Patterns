@@ -94,10 +94,10 @@ namespace hehexd
                     Select("del");
                     break;
                 case MyShape.Drag:
-                    Select("move");
+                    //Select("move");
                     break;
                 case MyShape.Resize:
-                    Select("Rs");
+                    //Select("Rs");
                     break;
                 default:
                     return;
@@ -189,7 +189,6 @@ namespace hehexd
 
                         else if(msg == "move")
                         {
-
                             if ((start.X > posx && start.X < xfield && start.Y - 50 > posy && start.Y - 50 < yfield && move == false) || currentobj == i && move == true)
                             {
                                 currentobj = i;
@@ -208,6 +207,8 @@ namespace hehexd
                         {
                             if ((start.X > posx && start.X < xfield && start.Y - 50 > posy && start.Y - 50 < yfield && move == false) || currentobj == i && move == true)
                             {
+                                currentobj = i;
+                                move = true;
                                 double nposx = (start.X - end.X);
                                 double nposy = (start.Y - end.Y);
                                 child.SetValue(Canvas.WidthProperty, posx - nposx);
