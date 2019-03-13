@@ -19,13 +19,6 @@ namespace hehexd
             this.end = end;
         }
 
-        public override void Draw(Canvas canvas)
-        {
-            Rectangle rect = new Rectangle();
-            //set eigenschappen Rectangle
-            canvas.Children.Add(rect);
-        }
-
         public override Shape GetObject()
         {
             Rectangle rect = new Rectangle() {
