@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Drawing;
 
 namespace hehexd
 {
-    class EllipseCommand
+    public interface ICommand
     {
+        void Execute(DrawingCanvas dc);
+        //void Unexecute();
     }
 }

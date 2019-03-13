@@ -1,4 +1,5 @@
-﻿using System;
+﻿using hehexd.Tools;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,22 +21,14 @@ namespace hehexd
     /// </summary>
     public partial class MainWindow : Window
     {
-        public enum MyShape
-        {
-            Line, Ellipse, Rectangle, Selecter, Deleter, Drag, Resize
-        }
-
-        private MyShape currShape = MyShape.Line;
-        private MyShape lastShape;
-        Point start;
-        Point end;
-        int currentobj = -1;
-        bool move = false;
-        double posz = 0;
-
+        
+        private AbstractTool activeTool = new RectangleTool();
+        private DrawingCanvas drawingCanvas;
+        
         public MainWindow()
         {
             InitializeComponent();
+            drawingCanvas = new DrawingCanvas(MyCanvas);
         }
 
         private void LineButton_Click(object sender, RoutedEventArgs e)
@@ -51,6 +44,7 @@ namespace hehexd
         private void RectangleButton_Click(object sender, RoutedEventArgs e)
         {
             currShape = MyShape.Rectangle;
+            drawingCanvas.SetActiveTool(new RectangleTool());       // repeat naar boeven en beneden met goede tools
         }
 
         private void SelectButton_Click(object sender, RoutedEventArgs e)
@@ -73,8 +67,72 @@ namespace hehexd
             currShape = MyShape.Resize;
         }
 
+
+        private void MyCanvas_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            //start = e.GetPosition(this);
+            //currentobj = -1;
+            //move = false;
+            //lastShape = MyShape.Drag;
+
+            end = e.GetPosition(MyCanvas);
+            drawingCanvas.mouseEnter(end);
+        }
+
+        private void MyCanvas_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            //if (lastShape == MyShape.Rectangle && currShape == MyShape.Rectangle || lastShape == MyShape.Ellipse && currShape == MyShape.Ellipse)
+            //{
+            //    MyCanvas.Children.RemoveAt(MyCanvas.Children.Count - 1);
+            //}
+            //Shapeprinter();
+
+            
+            drawingCanvas.mouseOther(e.GetPosition(MyCanvas), false);
+            end = new Point(-1, -1);
+        }
+
+        private void MyCanvas_MouseMove(object sender, MouseEventArgs e)
+        {
+            //if (e.GetPosition(this) != end && e.LeftButton == MouseButtonState.Pressed)
+            //{
+            //    if (currShape != MyShape.Drag)
+            //    {
+            //        end = e.GetPosition(this);
+            //        ShapeUpdate();
+            //        Shapeprinter();
+            //    }
+            //    else
+            //    {
+            //        end = e.GetPosition(this);
+            //        Drag();
+            //        Shapeprinter();
+            //    }
+            //}
+            
+            if (e.GetPosition(MyCanvas) != end && e.LeftButton == MouseButtonState.Pressed)
+            {
+                end = e.GetPosition(MyCanvas);
+                drawingCanvas.mouseOther(end, true);
+            } 
+        }
+
+        public enum MyShape
+        {
+            Line, Ellipse, Rectangle, Selecter, Deleter, Drag, Resize
+        }
+
+        private MyShape currShape = MyShape.Line;
+        private MyShape lastShape;
+        Point start;
+        Point end;
+        int currentobj = -1;
+        bool move = false;
+        double posz = 0;
+
         private void Shapeprinter()
         {
+            //execute(activeTool.getCommand());
             switch (currShape)
             {
                 case MyShape.Line:
@@ -99,42 +157,6 @@ namespace hehexd
                     break;
                 default:
                     return;
-            }
-        }
-
-        private void MyCanvas_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            start = e.GetPosition(this);
-            currentobj = -1;
-            move = false;
-            lastShape = MyShape.Drag;
-        }
-
-        private void MyCanvas_MouseUp(object sender, MouseButtonEventArgs e)
-        {
-            if (lastShape == MyShape.Rectangle && currShape == MyShape.Rectangle || lastShape == MyShape.Ellipse && currShape == MyShape.Ellipse)
-            {
-                MyCanvas.Children.RemoveAt(MyCanvas.Children.Count - 1);
-            }
-            Shapeprinter();
-        }
-
-        private void MyCanvas_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (e.GetPosition(this) != end && e.LeftButton == MouseButtonState.Pressed)
-            {
-                if (currShape != MyShape.Drag)
-                {
-                    end = e.GetPosition(this);
-                    ShapeUpdate();
-                    Shapeprinter();
-                }
-                else
-                {
-                    end = e.GetPosition(this);
-                    Drag();
-                    Shapeprinter();
-                }
             }
         }
 
