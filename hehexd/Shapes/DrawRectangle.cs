@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace hehexd
 {
-    public interface ICommand
+    class DrawRectangle
     {
-        void Execute();
-        //void Unexecute();
+        public void Draw()
+        {
+
+        }
     }
 }

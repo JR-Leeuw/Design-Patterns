@@ -13,3 +13,6 @@ C:\Users\lhmbe\OneDrive\Documenten\GitHub\Design-Patterns\hehexd\obj\Debug\hehex
 C:\Users\lhmbe\OneDrive\Documenten\GitHub\Design-Patterns\hehexd\obj\Debug\hehexd.csproj.CoreCompileInputs.cache
 C:\Users\lhmbe\OneDrive\Documenten\GitHub\Design-Patterns\hehexd\obj\Debug\hehexd.exe
 C:\Users\lhmbe\OneDrive\Documenten\GitHub\Design-Patterns\hehexd\obj\Debug\hehexd.pdb
+C:\Users\lhmbe\OneDrive\Documenten\GitHub\Design-Patterns\hehexd\bin\Debug\Dewey.dll
+C:\Users\lhmbe\OneDrive\Documenten\GitHub\Design-Patterns\hehexd\bin\Debug\Dewey.Drawing.dll
+C:\Users\lhmbe\OneDrive\Documenten\GitHub\Design-Patterns\hehexd\obj\Debug\hehexd.csproj.CopyComplete

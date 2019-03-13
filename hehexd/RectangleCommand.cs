@@ -6,7 +6,18 @@ using System.Threading.Tasks;
 
 namespace hehexd
 {
-    class RectangleCommand
+    class RectangleCommand : ICommand
     {
+        private DrawRectangle drawrectangle;
+
+        public RectangleCommand(DrawRectangle drawrectangle)
+        {
+            this.drawrectangle = drawrectangle;
+        }
+
+        public void Execute()
+        {
+            drawrectangle.Draw();
+        }
     }
 }

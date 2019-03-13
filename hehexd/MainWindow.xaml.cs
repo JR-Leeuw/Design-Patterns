@@ -27,6 +27,11 @@ namespace hehexd
 
         private MyShape currShape = MyShape.Line;
         private MyShape lastShape;
+        Point start;
+        Point end;
+        int currentobj = -1;
+        bool move = false;
+        double posz = 0;
 
         public MainWindow()
         {
@@ -67,12 +72,6 @@ namespace hehexd
         {
             currShape = MyShape.Resize;
         }
-
-        Point start;
-        Point end;
-        int currentobj = -1;
-        bool move = false;
-        double posz = 0;
 
         private void Shapeprinter()
         {
