@@ -12,9 +12,13 @@ namespace hehexd.Tools
     {
         public override ICommand getCommand(Point end, bool temporary)
         {
-            
-            DragCommand d = new DragCommand(this.start, end);
-            return d;
+            if (child != null)
+            {
+                DragCommand d = new DragCommand(this.start, end, child);
+                return d;
+            }
+            else
+                    return null;
         }
     }
 }

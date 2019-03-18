@@ -49,15 +49,19 @@ namespace hehexd
             activeTool = tool;
         }
 
-        public void mouseEnter(Point start)
+        public void mouseEnter(Point start, UIElement child)
         {
-            activeTool.setBeginPoint(start);
+            activeTool.setBeginPoint(start, child);
         }
 
         public void mouseOther(Point end, bool drag)
         {
             if (activeTool.PointChanged(end))
-                execute(activeTool.getCommand(end, drag));
+            {
+                ICommand ic = activeTool.getCommand(end, drag);
+                if (ic != null)
+                    execute(ic);
+            }
         }
 
         public Canvas GetCanvas()

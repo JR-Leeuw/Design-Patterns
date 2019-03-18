@@ -12,14 +12,14 @@ namespace hehexd.Commands
     {
         protected Point start;
         protected Point end;
-        int hzindex = 0;
-        Size size;
-        double posx, posy, width, hight, xright, ybottom;
+        protected UIElement child;
+        double posx, posy;
 
-        public DragCommand(Point start, Point end)
+        public DragCommand(Point start, Point end, UIElement child)
         {
             this.start = start;
             this.end = end;
+            this.child = child;
         }
 
         public void Delete(DrawingCanvas dc)
@@ -29,27 +29,13 @@ namespace hehexd.Commands
 
         public void Execute(DrawingCanvas dc)
         {
-            UIElement child = dc.GetCanvas().Children[0];
-            for (int i = dc.GetCanvas().Children.Count - 1; i > -1; i--)
-            {
-                child = dc.GetCanvas().Children[i];
-                posx = Convert.ToDouble(child.GetValue(Canvas.LeftProperty));
-                posy = Convert.ToDouble(child.GetValue(Canvas.TopProperty));
-                size = child.RenderSize;
-                hight = size.Height;
-                width = size.Width;
-                xright = posx + width;
-                ybottom = posy + hight;
-
-                if ((start.X > posx && start.X < xright && start.Y > posy && start.Y < ybottom))
-                {
-                    double nposx = (start.X - end.X);
-                    double nposy = (start.Y - end.Y);
-                    child.SetValue(Canvas.LeftProperty, posx - nposx);
-                    child.SetValue(Canvas.TopProperty, posy - nposy);
-                    //child.SetValue(Canvas.StyleProperty, Brushes.Blue);
-                }
-            }
+            posx = Convert.ToDouble(child.GetValue(Canvas.LeftProperty));
+            posy = Convert.ToDouble(child.GetValue(Canvas.TopProperty));
+            double nposx = (start.X - end.X);
+            double nposy = (start.Y - end.Y);
+            child.SetValue(Canvas.LeftProperty, posx - nposx);
+            child.SetValue(Canvas.TopProperty, posy - nposy);
+            //child.SetValue(Canvas.StyleProperty, Brushes.Blue);
         }
     }
 }
