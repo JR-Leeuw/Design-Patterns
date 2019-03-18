@@ -11,9 +11,9 @@ using System.Windows.Media;
 
 namespace hehexd
 {
-    public class RectangleShape : AbstractShape
+    public class EllipseShape : AbstractShape
     {
-        public RectangleShape(Point start, Point end)
+        public EllipseShape(Point start, Point end)
         {
             this.start = start;
             this.end = end;
@@ -21,33 +21,34 @@ namespace hehexd
 
         public override Shape GetObject()
         {
-            Rectangle newRectangle = new Rectangle() {
+            Ellipse newEllipse = new Ellipse()
+            {
                 Fill = Brushes.Black,
                 Stroke = Brushes.White,
-                StrokeThickness  = 4
+                StrokeThickness = 4
             };
             if (end.X >= start.X)
             {
-                newRectangle.SetValue(Canvas.LeftProperty, start.X);
-                newRectangle.Width = end.X - start.X;
+                newEllipse.SetValue(Canvas.LeftProperty, start.X);
+                newEllipse.Width = end.X - start.X;
             }
             else
             {
-                newRectangle.SetValue(Canvas.LeftProperty, end.X);
-                newRectangle.Width = start.X - end.X;
+                newEllipse.SetValue(Canvas.LeftProperty, end.X);
+                newEllipse.Width = start.X - end.X;
             }
 
             if (end.Y >= start.Y)
             {
-                newRectangle.SetValue(Canvas.TopProperty, start.Y);
-                newRectangle.Height = end.Y - start.Y;
+                newEllipse.SetValue(Canvas.TopProperty, start.Y);
+                newEllipse.Height = end.Y - start.Y;
             }
             else
             {
-                newRectangle.SetValue(Canvas.TopProperty, end.Y);
-                newRectangle.Height = start.Y - end.Y;
+                newEllipse.SetValue(Canvas.TopProperty, end.Y);
+                newEllipse.Height = start.Y - end.Y;
             }
-            return newRectangle;
+            return newEllipse;
         }
     }
 }

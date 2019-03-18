@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace hehexd
+namespace hehexd.Commands
 {
-    public interface ICommand
+    public interface IRCommand : ICommand
     {
-        void Execute(DrawingCanvas dc);
-        void Delete(DrawingCanvas dc);
+        void Unexecute(DrawingCanvas dc);
     }
 }

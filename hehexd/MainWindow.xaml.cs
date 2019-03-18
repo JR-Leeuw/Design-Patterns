@@ -23,6 +23,7 @@ namespace hehexd
     {
         
         private AbstractTool activeTool = new RectangleTool();
+        string tool = "";
         private DrawingCanvas drawingCanvas;
         
         public MainWindow()
@@ -39,11 +40,13 @@ namespace hehexd
         private void EllipseButton_Click(object sender, RoutedEventArgs e)
         {
             currShape = MyShape.Ellipse;
+            drawingCanvas.SetActiveTool(new EllipseTool());         
         }
 
         private void RectangleButton_Click(object sender, RoutedEventArgs e)
         {
             currShape = MyShape.Rectangle;
+            tool = "";
             drawingCanvas.SetActiveTool(new RectangleTool());       // repeat naar boeven en beneden met goede tools
         }
 
@@ -59,7 +62,9 @@ namespace hehexd
 
         private void DragButton_Click(object sender, RoutedEventArgs e)
         {
-            currShape = MyShape.Drag;
+            //currShape = MyShape.Drag;
+            tool = "b";
+            drawingCanvas.SetActiveTool(new DragTool());
         }
 
         private void ResizeButton_Click(object sender, RoutedEventArgs e)
@@ -70,48 +75,26 @@ namespace hehexd
 
         private void MyCanvas_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            //start = e.GetPosition(this);
-            //currentobj = -1;
-            //move = false;
-            //lastShape = MyShape.Drag;
-
             end = e.GetPosition(MyCanvas);
             drawingCanvas.mouseEnter(end);
         }
 
         private void MyCanvas_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            //if (lastShape == MyShape.Rectangle && currShape == MyShape.Rectangle || lastShape == MyShape.Ellipse && currShape == MyShape.Ellipse)
-            //{
-            //    MyCanvas.Children.RemoveAt(MyCanvas.Children.Count - 1);
-            //}
-            //Shapeprinter();
-
-            
             drawingCanvas.mouseOther(e.GetPosition(MyCanvas), false);
             end = new Point(-1, -1);
         }
 
         private void MyCanvas_MouseMove(object sender, MouseEventArgs e)
-        {
-            //if (e.GetPosition(this) != end && e.LeftButton == MouseButtonState.Pressed)
-            //{
-            //    if (currShape != MyShape.Drag)
-            //    {
-            //        end = e.GetPosition(this);
-            //        ShapeUpdate();
-            //        Shapeprinter();
-            //    }
-            //    else
-            //    {
-            //        end = e.GetPosition(this);
-            //        Drag();
-            //        Shapeprinter();
-            //    }
-            //}
-            
+        {         
             if (e.GetPosition(MyCanvas) != end && e.LeftButton == MouseButtonState.Pressed)
             {
+                start = end;
+                string s = activeTool.ToString();
+                if (tool == "b")
+                {
+                    drawingCanvas.mouseEnter(start);
+                }
                 end = e.GetPosition(MyCanvas);
                 drawingCanvas.mouseOther(end, true);
             } 
@@ -139,10 +122,10 @@ namespace hehexd
                     DrawLine();
                     break;
                 case MyShape.Ellipse:
-                    DrawEllipse(Brushes.Black, Brushes.White, 4, "m", 0);
+                    //DrawEllipse(Brushes.Black, Brushes.White, 4, "m", 0);
                     break;
                 case MyShape.Rectangle:
-                    DrawRectangle(Brushes.Black, Brushes.White, 4, "m", 0);
+                    //DrawRectangle(Brushes.Black, Brushes.White, 4, "m", 0);
                     break;
                 case MyShape.Selecter:
                     Select("sel");
@@ -173,34 +156,34 @@ namespace hehexd
             MyCanvas.Children.Remove(child);
         }
 
-        private void Drag()
-        {
-            for (int i = MyCanvas.Children.Count - 1; i > -1; i--)
-            {
-                var child = MyCanvas.Children[i];
-                double posx = Convert.ToDouble(child.GetValue(Canvas.LeftProperty));
-                double posy = Convert.ToDouble(child.GetValue(Canvas.TopProperty));
-                double posz = Convert.ToDouble(child.GetValue(Canvas.TopProperty));
-                var size = child.RenderSize;
-                double hight = size.Height;
-                double width = size.Width;
-                double xfield = posx + width;
-                double yfield = posy + hight;
+        //private void Drag()
+        //{
+        //    for (int i = MyCanvas.Children.Count - 1; i > -1; i--)
+        //    {
+        //        var child = MyCanvas.Children[i];
+        //        double posx = Convert.ToDouble(child.GetValue(Canvas.LeftProperty));
+        //        double posy = Convert.ToDouble(child.GetValue(Canvas.TopProperty));
+        //        double posz = Convert.ToDouble(child.GetValue(Canvas.TopProperty));
+        //        var size = child.RenderSize;
+        //        double hight = size.Height;
+        //        double width = size.Width;
+        //        double xfield = posx + width;
+        //        double yfield = posy + hight;
 
-                if ((start.X > posx && start.X < xfield && start.Y - 50 > posy && start.Y - 50 < yfield && move == false) || currentobj == i && move == true)
-                {
-                    currentobj = i;
-                    move = true;
-                    double nposx = (start.X - end.X);
-                    double nposy = (start.Y - end.Y);
-                    child.SetValue(Canvas.LeftProperty, posx - nposx);
-                    child.SetValue(Canvas.TopProperty, posy - nposy);
-                    //child.SetValue(Canvas.StyleProperty, Brushes.Blue);
-                    start = end;
-                    lastShape = MyShape.Drag;
-                }
-            }
-        }
+        //        if ((start.X > posx && start.X < xfield && start.Y - 50 > posy && start.Y - 50 < yfield && move == false) || currentobj == i && move == true)
+        //        {
+        //            currentobj = i;
+        //            move = true;
+        //            double nposx = (start.X - end.X);
+        //            double nposy = (start.Y - end.Y);
+        //            child.SetValue(Canvas.LeftProperty, posx - nposx);
+        //            child.SetValue(Canvas.TopProperty, posy - nposy);
+        //            //child.SetValue(Canvas.StyleProperty, Brushes.Blue);
+        //            start = end;
+        //            lastShape = MyShape.Drag;
+        //        }
+        //    }
+        //}
 
         private void Resize()
         {
@@ -252,28 +235,28 @@ namespace hehexd
                     double xfield = posx + width;
                     double yfield = posy + hight;
 
-                    if (start.X > posx && start.X < xfield && start.Y - 50 > posy && start.Y - 50 < yfield)
-                    {
-                        if (msg == "sel")
-                        {
-                            Remove(child);
-                            start.X = posx; start.Y = posy + 50; end.X = xfield; end.Y = yfield + 50;
-                            if (type == "Rectangle")
-                                DrawRectangle(Brushes.Red, Brushes.Blue, 4, "g", i);
-                            else
-                                DrawEllipse(Brushes.Red, Brushes.Blue, 4, "g", i);
-                            //ShapeUpdate();
-                            Shapeprinter();
-                            lastShape = currShape;
-                        }
+                    //if (start.X > posx && start.X < xfield && start.Y - 50 > posy && start.Y - 50 < yfield)
+                    //{
+                    //    if (msg == "sel")
+                    //    {
+                    //        Remove(child);
+                    //        start.X = posx; start.Y = posy + 50; end.X = xfield; end.Y = yfield + 50;
+                    //        if (type == "Rectangle")
+                    //            DrawRectangle(Brushes.Red, Brushes.Blue, 4, "g", i);
+                    //        else
+                    //            DrawEllipse(Brushes.Red, Brushes.Blue, 4, "g", i);
+                    //        //ShapeUpdate();
+                    //        Shapeprinter();
+                    //        lastShape = currShape;
+                    //    }
 
-                        else if (msg == "del")
-                        {
-                            Remove(child);
-                            lastShape = currShape;
-                        }
-                        break;
-                    }
+                    //    else if (msg == "del")
+                    //    {
+                    //        Remove(child);
+                    //        lastShape = currShape;
+                    //    }
+                    //    break;
+                    //}
                 }
             }
         }
@@ -289,91 +272,6 @@ namespace hehexd
                 Y2 = end.Y - 50
             };
             MyCanvas.Children.Add(newLine);
-            lastShape = currShape;
-        }
-
-        private void DrawEllipse(SolidColorBrush S, SolidColorBrush F, int ST, string type, int i)
-        {
-            Ellipse newEllipse = new Ellipse()
-            {
-                Fill = S,
-                Stroke = F,
-                StrokeThickness = ST
-            };
-
-            if (end.X >= start.X)
-            {
-                newEllipse.SetValue(Canvas.LeftProperty, start.X);
-                newEllipse.Width = end.X - start.X;
-            }
-            else
-            {
-                newEllipse.SetValue(Canvas.LeftProperty, end.X);
-                newEllipse.Width = start.X - end.X;
-            }
-
-            if (end.Y >= start.Y)
-            {
-                newEllipse.SetValue(Canvas.TopProperty, start.Y - 50);
-                newEllipse.Height = end.Y - start.Y;
-            }
-            else
-            {
-                newEllipse.SetValue(Canvas.TopProperty, end.Y - 50);
-                newEllipse.Height = start.Y - end.Y;
-            }
-            if (type == "g")
-            {
-                MyCanvas.Children.Insert(i, newEllipse);
-            }
-            else
-            {
-                MyCanvas.Children.Add(newEllipse);
-                posz = Convert.ToDouble(newEllipse.GetValue(Canvas.LeftProperty));
-            }
-            lastShape = currShape;
-        }
-
-
-        private void DrawRectangle(SolidColorBrush S, SolidColorBrush F, int ST, string type, int i)
-        {
-            Rectangle newRectangle = new Rectangle()
-            {
-                Fill = S,
-                Stroke = F,
-                StrokeThickness = ST
-            };
-
-            if (end.X >= start.X)
-            {
-                newRectangle.SetValue(Canvas.LeftProperty, start.X);
-                newRectangle.Width = end.X - start.X;
-            }
-            else
-            {
-                newRectangle.SetValue(Canvas.LeftProperty, end.X);
-                newRectangle.Width = start.X - end.X;
-            }
-
-            if (end.Y >= start.Y)
-            {
-                newRectangle.SetValue(Canvas.TopProperty, start.Y - 50);
-                newRectangle.Height = end.Y - start.Y;
-            }
-            else
-            {
-                newRectangle.SetValue(Canvas.TopProperty, end.Y - 50);
-                newRectangle.Height = start.Y - end.Y;
-            }
-            if (type == "g")
-            {
-                MyCanvas.Children.Insert(i, newRectangle);
-            }
-            else
-            {
-                MyCanvas.Children.Add(newRectangle);
-                posz = Convert.ToDouble(newRectangle.GetValue(Canvas.LeftProperty));
-            }
             lastShape = currShape;
         }
     }

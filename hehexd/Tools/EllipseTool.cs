@@ -1,12 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using hehexd.Commands;
 
 namespace hehexd.Tools
 {
-    class EllipseTool
+    public class EllipseTool: AbstractTool
     {
+        public override ICommand getCommand(Point end, bool temporary)
+        {
+            if (temporary)
+            {
+                return new TempDrawCommand(new EllipseShape(this.start, end));
+            }
+            else
+            {
+                return new DrawCommand(new EllipseShape(this.start, end));
+            }
+        }
     }
 }

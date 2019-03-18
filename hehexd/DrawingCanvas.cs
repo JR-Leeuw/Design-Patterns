@@ -1,4 +1,6 @@
-﻿using hehexd.Tools;
+﻿using hehexd.Commands;
+using hehexd.composite;
+using hehexd.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +15,9 @@ namespace hehexd
     {
         private Canvas myCanvas;
         private AbstractTool activeTool = new RectangleTool();
-        private List<ICommand> history = new List<ICommand>();
+        private List<IRCommand> history = new List<IRCommand>();
+        private ICommand tempcommand;
+        private ShapeTree shapetree;
 
         public DrawingCanvas(Canvas myCanvas)
         {
@@ -22,13 +26,22 @@ namespace hehexd
 
         public void execute(ICommand command)
         {
+            if (history.Contains(tempcommand) || tempcommand == null) { }
+            else
+            tempcommand.Delete(this);
             command.Execute(this);
-            history.Add(command);
+            tempcommand = command;
+            if (command is IRCommand)
+            history.Add((IRCommand)command);
         }
 
         public void repaint()
         {
-            //myCanvas.repaint();
+            //myCanvas.Children.Clear();
+            //foreach (IRCommand command in history)
+            //{
+            //    command.Execute(this);
+            //}
         }
 
         public void SetActiveTool(AbstractTool tool)

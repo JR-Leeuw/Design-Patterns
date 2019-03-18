@@ -63,12 +63,18 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\DrawCommand.cs" />
+    <Compile Include="Commands\IRCommand.cs" />
+    <Compile Include="Commands\DragCommand.cs" />
+    <Compile Include="composite\ShapeTree.cs" />
     <Compile Include="DrawingCanvas.cs" />
-    <Compile Include="Invoker.cs" />
     <Compile Include="Shapes\AbstractShape.cs" />
+    <Compile Include="Shapes\EllipseShape.cs" />
     <Compile Include="Shapes\RectangleShape.cs" />
     <Compile Include="Tools\AbstractTool.cs" />
+    <Compile Include="Tools\DragTool.cs" />
+    <Compile Include="Tools\EllipseTool.cs" />
     <Compile Include="Tools\RectangleTool.cs" />
+    <Compile Include="Commands\TempDrawCommand.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

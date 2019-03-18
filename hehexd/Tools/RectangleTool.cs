@@ -12,7 +12,14 @@ namespace hehexd.Tools
     {
         public override ICommand getCommand(Point end, bool temporary)
         {
-            return new DrawCommand(new RectangleShape(this.start, end));
+             if (temporary)
+            {
+                return new TempDrawCommand(new RectangleShape(this.start, end));
+            }
+            else
+            {
+                return new DrawCommand(new RectangleShape(this.start, end));
+            }
         }
     }
 }

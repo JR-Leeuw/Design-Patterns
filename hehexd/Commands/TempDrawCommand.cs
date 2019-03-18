@@ -1,19 +1,15 @@
-﻿using hehexd.Shapes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using hehexd.Commands;
+using hehexd.Shapes;
 
-namespace hehexd.Commands
+namespace hehexd.Tools
 {
-    public class DrawCommand : IRCommand
+    public class TempDrawCommand : ICommand
     {
 
         private AbstractShape shape;
 
 
-        public DrawCommand(AbstractShape shape)
+        public TempDrawCommand(AbstractShape shape)
         {
             this.shape = shape;
         }
@@ -22,12 +18,6 @@ namespace hehexd.Commands
         {
             //do draw shit (gooi in lijs en redraw canvas)
             dc.GetCanvas().Children.Add(shape.GetObject());
-
-        }
-
-        public void Unexecute(DrawingCanvas dc)
-        {
-            //dc.GetCanvas().Children.Remove(shape.GetObject());
         }
 
         public void Delete(DrawingCanvas dc)

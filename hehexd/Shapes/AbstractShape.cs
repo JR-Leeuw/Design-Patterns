@@ -14,7 +14,6 @@ namespace hehexd.Shapes
         protected Point start;
         protected Point end;
 
-        public abstract void Draw(Canvas canvas);
         public abstract Shape GetObject();
     }
 }
