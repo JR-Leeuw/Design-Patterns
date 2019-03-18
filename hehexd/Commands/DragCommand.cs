@@ -1,4 +1,5 @@
-﻿using System;
+﻿using hehexd.Shapes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,14 +13,11 @@ namespace hehexd.Commands
     {
         protected Point start;
         protected Point end;
-        protected UIElement child;
-        double posx, posy;
+        private AbstractFigure figure;
 
-        public DragCommand(Point start, Point end, UIElement child)
+        public DragCommand(AbstractFigure figure)
         {
-            this.start = start;
-            this.end = end;
-            this.child = child;
+            this.figure= figure;
         }
 
         public void Delete(DrawingCanvas dc)
@@ -29,13 +27,7 @@ namespace hehexd.Commands
 
         public void Execute(DrawingCanvas dc)
         {
-            posx = Convert.ToDouble(child.GetValue(Canvas.LeftProperty));
-            posy = Convert.ToDouble(child.GetValue(Canvas.TopProperty));
-            double nposx = (start.X - end.X);
-            double nposy = (start.Y - end.Y);
-            child.SetValue(Canvas.LeftProperty, posx - nposx);
-            child.SetValue(Canvas.TopProperty, posy - nposy);
-            //child.SetValue(Canvas.StyleProperty, Brushes.Blue);
+            figure.Drag();
         }
     }
 }

@@ -14,12 +14,17 @@ namespace hehexd.Tools
         {
              if (temporary)
             {
-                return new TempDrawCommand(new RectangleShape(this.start, end));
+                return new TempDrawCommand(new RectangleShape(this.start, end, child));
             }
             else
             {
-                return new DrawCommand(new RectangleShape(this.start, end));
+                return new DrawCommand(new RectangleShape(this.start, end, child));
             }
+        }
+
+        public override bool NeedsShape()
+        {
+            return true;
         }
     }
 }

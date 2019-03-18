@@ -11,12 +11,13 @@ using System.Windows.Media;
 
 namespace hehexd
 {
-    public class EllipseShape : AbstractShape
+    public class EllipseShape : AbstractFigure
     {
-        public EllipseShape(Point start, Point end)
+        public EllipseShape(Point start, Point end, UIElement child)
         {
             this.start = start;
             this.end = end;
+            this.child = child;
         }
 
         public override Shape GetObject()

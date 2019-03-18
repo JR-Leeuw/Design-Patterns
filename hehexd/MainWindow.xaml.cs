@@ -75,15 +75,16 @@ namespace hehexd
 
         private void MyCanvas_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            start = e.GetPosition(MyCanvas);
             end = e.GetPosition(MyCanvas);
-            child = SelectChild();
-            drawingCanvas.mouseEnter(end, child);
+            drawingCanvas.mouseEnter(end);
         }
 
         private void MyCanvas_MouseUp(object sender, MouseButtonEventArgs e)
         {
             drawingCanvas.mouseOther(e.GetPosition(MyCanvas), false);
             end = new Point(-1, -1);
+            child = null;
         }
 
         private void MyCanvas_MouseMove(object sender, MouseEventArgs e)
@@ -94,32 +95,11 @@ namespace hehexd
                 string s = activeTool.ToString();
                 if (tool == "b")
                 {
-                    drawingCanvas.mouseEnter(start, child);
+                    //drawingCanvas.mouseEnter(start, child);
                 }
                 end = e.GetPosition(MyCanvas);
                 drawingCanvas.mouseOther(end, true);
             } 
-        }
-
-        public UIElement SelectChild()
-        {
-            for (int i = MyCanvas.Children.Count - 1; i > -1; i--)
-            {
-                UIElement Child = MyCanvas.Children[i];
-                double posx = Convert.ToDouble(Child.GetValue(Canvas.LeftProperty));
-                double posy = Convert.ToDouble(Child.GetValue(Canvas.TopProperty));
-                Size size = Child.RenderSize;
-                double height = size.Height;
-                double width = size.Width;
-                double xright = posx + width;
-                double ybottom = posy + height;
-
-                if ((start.X > posx && start.X < xright && start.Y > posy && start.Y < ybottom))
-                {
-                    return Child;
-                }
-            }
-            return null;
         }
 
         private void Remove(UIElement child)

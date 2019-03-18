@@ -12,13 +12,17 @@ namespace hehexd.Tools
     {
         public override ICommand getCommand(Point end, bool temporary)
         {
-            if (child != null)
+            if (abstractFigure != null)
             {
-                DragCommand d = new DragCommand(this.start, end, child);
-                return d;
+                return new DragCommand(this.abstractFigure);
             }
             else
-                    return null;
+            return null;
+        }
+
+        public override bool NeedsShape()
+        {
+            return false;
         }
     }
 }

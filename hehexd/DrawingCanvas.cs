@@ -1,5 +1,6 @@
 ﻿using hehexd.Commands;
 using hehexd.composite;
+using hehexd.Shapes;
 using hehexd.Tools;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,8 @@ namespace hehexd
         private List<IRCommand> history = new List<IRCommand>();
         private ICommand tempcommand;
         private ShapeTree shapetree;
+        private List<AbstractFigure> figures = new List<AbstractFigure>();
+        private bool ShapeExists;
 
         public DrawingCanvas(Canvas myCanvas)
         {
@@ -37,11 +40,7 @@ namespace hehexd
 
         public void repaint()
         {
-            //myCanvas.Children.Clear();
-            //foreach (IRCommand command in history)
-            //{
-            //    command.Execute(this);
-            //}
+
         }
 
         public void SetActiveTool(AbstractTool tool)
@@ -49,15 +48,24 @@ namespace hehexd
             activeTool = tool;
         }
 
-        public void mouseEnter(Point start, UIElement child)
+        public void mouseEnter(Point start)
         {
-            activeTool.setBeginPoint(start, child);
+            ShapeExists = false;
+            activeTool.setBeginPoint(FindFigure(start), start);
+
         }
 
         public void mouseOther(Point end, bool drag)
         {
             if (activeTool.PointChanged(end))
             {
+                if (activeTool.NeedsShape() && ShapeExists != true) 
+                {
+                    ShapeExists = true;
+                    //maak leeg UIElment maakt mij niet uit deze zal overschreden worden
+                    //canvas.add(dat)
+                    //activetool.setShape(dat)
+                }
                 ICommand ic = activeTool.getCommand(end, drag);
                 if (ic != null)
                     execute(ic);
@@ -67,6 +75,15 @@ namespace hehexd
         public Canvas GetCanvas()
         {
             return myCanvas;
+        }
+
+        public AbstractFigure FindFigure(Point start)
+        {
+            foreach(AbstractFigure f in figures)
+            {
+                if (f.find(start) != null) return f;
+            }
+            return null;
         }
     }
 }

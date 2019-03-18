@@ -6,10 +6,10 @@ namespace hehexd.Tools
     public class TempDrawCommand : ICommand
     {
 
-        private AbstractShape shape;
+        private AbstractFigure shape;
 
 
-        public TempDrawCommand(AbstractShape shape)
+        public TempDrawCommand(AbstractFigure shape)
         {
             this.shape = shape;
         }

@@ -10,19 +10,17 @@ namespace hehexd.Commands
     public class DrawCommand : IRCommand
     {
 
-        private AbstractShape shape;
+        private AbstractFigure shape;
 
 
-        public DrawCommand(AbstractShape shape)
+        public DrawCommand(AbstractFigure shape)
         {
             this.shape = shape;
         }
 
         public void Execute(DrawingCanvas dc)
         {
-            //do draw shit (gooi in lijs en redraw canvas)
             dc.GetCanvas().Children.Add(shape.GetObject());
-
         }
 
         public void Unexecute(DrawingCanvas dc)
