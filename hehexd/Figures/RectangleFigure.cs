@@ -27,27 +27,6 @@ namespace hehexd
                 Stroke = Brushes.White,
                 StrokeThickness  = 4
             };
-            if (end.X >= start.X)
-            {
-                newRectangle.SetValue(Canvas.LeftProperty, start.X);
-                newRectangle.Width = end.X - start.X;
-            }
-            else
-            {
-                newRectangle.SetValue(Canvas.LeftProperty, end.X);
-                newRectangle.Width = start.X - end.X;
-            }
-
-            if (end.Y >= start.Y)
-            {
-                newRectangle.SetValue(Canvas.TopProperty, start.Y);
-                newRectangle.Height = end.Y - start.Y;
-            }
-            else
-            {
-                newRectangle.SetValue(Canvas.TopProperty, end.Y);
-                newRectangle.Height = start.Y - end.Y;
-            }
             return newRectangle;
         }
     }

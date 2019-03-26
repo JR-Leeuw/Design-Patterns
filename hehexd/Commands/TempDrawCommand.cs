@@ -1,28 +1,34 @@
 ﻿using hehexd.Commands;
 using hehexd.Shapes;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace hehexd.Tools
 {
     public class TempDrawCommand : ICommand
     {
 
-        private AbstractFigure shape;
+        private AbstractFigure figure;
 
 
-        public TempDrawCommand(AbstractFigure shape)
+        public TempDrawCommand(AbstractFigure figure)
         {
-            this.shape = shape;
+            this.figure = figure;
         }
 
         public void Execute(DrawingCanvas dc)
         {
-            //do draw shit (gooi in lijs en redraw canvas)
-            dc.GetCanvas().Children.Add(shape.GetObject());
+            figure.Drawshape();
         }
 
         public void Delete(DrawingCanvas dc)
         {
-            dc.GetCanvas().Children.RemoveAt(dc.GetCanvas().Children.Count - 1);
+            //dc.GetCanvas().Children.RemoveAt(dc.GetCanvas().Children.Count - 1);
+        }
+
+        AbstractFigure ICommand.returnshape()
+        {
+            return figure;
         }
     }
 }

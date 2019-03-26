@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using hehexd.Commands;
+using System.Windows.Media;
+using System.Windows.Shapes;
 
 namespace hehexd.Tools
 {
-    public class RectangleTool : AbstractTool
+    public class RectangleTool : AbstractTool, IToolNeedsShape
     {
         public override ICommand getCommand(Point end, bool temporary)
         {
@@ -22,9 +24,9 @@ namespace hehexd.Tools
             }
         }
 
-        public override bool NeedsShape()
+        public UIElement getShape()
         {
-            return true;
+            return new Rectangle() { Width = 0, Height = 0, Fill = Brushes.Black, };
         }
     }
 }

@@ -16,7 +16,6 @@ namespace hehexd.Shapes
         protected UIElement child;
 
         public abstract Shape GetObject();
-
         public void Drag()
         {
             double posx = Convert.ToDouble(child.GetValue(Canvas.LeftProperty));
@@ -28,9 +27,37 @@ namespace hehexd.Shapes
             //child.SetValue(Canvas.StyleProperty, Brushes.Blue);
         }
 
+        public void Drawshape()
+        {
+            var end = rEnd();
+            var start = rStart();
+            if (end.X >= start.X)
+            {
+                 child.SetValue(Canvas.LeftProperty, start.X);
+                 child.SetValue(Canvas.WidthProperty, end.X- start.X);
+            }
+            else
+            {
+                child.SetValue(Canvas.LeftProperty, end.X);
+                child.SetValue(Canvas.WidthProperty, start.X - end.X);
+            }
+
+            if (end.Y >= start.Y)
+            {
+                child.SetValue(Canvas.TopProperty, start.Y);
+                child.SetValue(Canvas.HeightProperty, end.Y - start.Y);
+            }
+            else
+            {
+                child.SetValue(Canvas.TopProperty, end.Y);
+                child.SetValue(Canvas.HeightProperty, start.Y - end.Y);
+            }
+        }
+
         public AbstractFigure find(Point punt)
         {
-            if ((start.X < punt.X && end.X > punt.X && start.Y < punt.Y && end.Y > punt.Y))
+            var s =  child.GetValue(Canvas.TopProperty);
+            if (Convert.ToDouble(child.GetValue(Canvas.LeftProperty)) < punt.X && (Convert.ToDouble(child.GetValue(Canvas.LeftProperty)) + Convert.ToDouble(child.GetValue(Canvas.WidthProperty)) > punt.X && Convert.ToDouble(child.GetValue(Canvas.TopProperty)) < punt.Y && Convert.ToDouble(child.GetValue(Canvas.TopProperty)) + Convert.ToDouble(child.GetValue(Canvas.HeightProperty)) > punt.Y))
             {
                 return this;
             }
@@ -38,6 +65,27 @@ namespace hehexd.Shapes
             {
                 return null;
             }
+        }
+
+        public Point rStart()
+        {
+            return start;
+        }
+
+        public Point rEnd()
+        {
+            return end;
+        }
+
+        public void setPoints(Point start, Point end)
+        {
+            this.start = start;
+            this.end = end;
+        }
+
+        public UIElement rChild()
+        {
+            return child;
         }
     }
 }

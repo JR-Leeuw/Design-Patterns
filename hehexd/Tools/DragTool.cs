@@ -19,10 +19,5 @@ namespace hehexd.Tools
             else
             return null;
         }
-
-        public override bool NeedsShape()
-        {
-            return false;
-        }
     }
 }

@@ -73,6 +73,7 @@
     <Compile Include="Tools\AbstractTool.cs" />
     <Compile Include="Tools\DragTool.cs" />
     <Compile Include="Tools\EllipseTool.cs" />
+    <Compile Include="Tools\IToolNeedsShape.cs" />
     <Compile Include="Tools\RectangleTool.cs" />
     <Compile Include="Commands\TempDrawCommand.cs" />
     <Page Include="MainWindow.xaml">

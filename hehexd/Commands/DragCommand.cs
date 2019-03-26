@@ -11,8 +11,8 @@ namespace hehexd.Commands
 {
     public class DragCommand : ICommand
     {
-        protected Point start;
-        protected Point end;
+        //protected Point start;
+        //protected Point end;
         private AbstractFigure figure;
 
         public DragCommand(AbstractFigure figure)
@@ -28,6 +28,12 @@ namespace hehexd.Commands
         public void Execute(DrawingCanvas dc)
         {
             figure.Drag();
+        } 
+
+
+        AbstractFigure ICommand.returnshape()
+        {
+            return figure;
         }
     }
 }

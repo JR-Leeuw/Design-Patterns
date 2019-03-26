@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace hehexd.Commands
 {
@@ -20,7 +22,7 @@ namespace hehexd.Commands
 
         public void Execute(DrawingCanvas dc)
         {
-            dc.GetCanvas().Children.Add(shape.GetObject());
+            //dc.GetCanvas().Children.Add(shape.GetObject());
         }
 
         public void Unexecute(DrawingCanvas dc)
@@ -31,6 +33,11 @@ namespace hehexd.Commands
         public void Delete(DrawingCanvas dc)
         {
             dc.GetCanvas().Children.RemoveAt(dc.GetCanvas().Children.Count - 1);
+        }
+
+        public AbstractFigure returnshape()
+        {
+            return shape;
         }
     }
 }

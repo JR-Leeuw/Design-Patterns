@@ -42,7 +42,8 @@ namespace hehexd
 
         private void EllipseButton_Click(object sender, RoutedEventArgs e)
         {
-            drawingCanvas.SetActiveTool(new EllipseTool());         
+            drawingCanvas.SetActiveTool(new EllipseTool());
+            string s = activeTool.ToString();
         }
 
         private void RectangleButton_Click(object sender, RoutedEventArgs e)
@@ -82,7 +83,7 @@ namespace hehexd
 
         private void MyCanvas_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            drawingCanvas.mouseOther(e.GetPosition(MyCanvas), false);
+            drawingCanvas.mouseOther(start, e.GetPosition(MyCanvas), false);
             end = new Point(-1, -1);
             child = null;
         }
@@ -91,14 +92,14 @@ namespace hehexd
         {         
             if (e.GetPosition(MyCanvas) != end && e.LeftButton == MouseButtonState.Pressed)
             {
-                start = end;
                 string s = activeTool.ToString();
                 if (tool == "b")
                 {
-                    //drawingCanvas.mouseEnter(start, child);
+                    drawingCanvas.mouseEnter(start);
                 }
                 end = e.GetPosition(MyCanvas);
-                drawingCanvas.mouseOther(end, true);
+                drawingCanvas.mouseOther(start, end, true);
+                start = end;
             } 
         }
 

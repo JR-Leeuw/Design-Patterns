@@ -15,7 +15,6 @@ namespace hehexd.Tools
         protected UIElement child;
 
         public abstract ICommand getCommand(Point end, bool temporary);
-        public abstract bool NeedsShape();
 
         public void setBeginPoint(AbstractFigure abstractFigure, Point start)
         {
