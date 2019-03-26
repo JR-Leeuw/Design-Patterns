@@ -99,28 +99,28 @@ namespace hehexd
                 }
                 end = e.GetPosition(MyCanvas);
                 drawingCanvas.mouseOther(start, end, true);
-                start = end;
+                //start = end;
             } 
         }
 
-        private void Remove(UIElement child)
-        {
-            MyCanvas.Children.Remove(child);
-        }
+        //private void Remove(UIElement child)
+        //{
+        //    MyCanvas.Children.Remove(child);
+        //}
 
-        private void Resize()
-        {
-            for (int i = MyCanvas.Children.Count - 1; i > -1; i--)
-            {
-                var child = MyCanvas.Children[i];
-                double posx = Convert.ToDouble(child.GetValue(Canvas.LeftProperty));
-                double posy = Convert.ToDouble(child.GetValue(Canvas.TopProperty));
-                double posz = Convert.ToDouble(child.GetValue(Canvas.TopProperty));
-                var size = child.RenderSize;
-                double hight = size.Height;
-                double width = size.Width;
-                double xfield = posx + width;
-                double yfield = posy + hight;
+        //private void Resize()
+        //{
+        //    for (int i = MyCanvas.Children.Count - 1; i > -1; i--)
+        //    {
+        //        var child = MyCanvas.Children[i];
+        //        double posx = Convert.ToDouble(child.GetValue(Canvas.LeftProperty));
+        //        double posy = Convert.ToDouble(child.GetValue(Canvas.TopProperty));
+        //        double posz = Convert.ToDouble(child.GetValue(Canvas.TopProperty));
+        //        var size = child.RenderSize;
+        //        double hight = size.Height;
+        //        double width = size.Width;
+        //        double xfield = posx + width;
+        //        double yfield = posy + hight;
 
             //    if ((start.X > posx && start.X < xfield && start.Y - 50 > posy && start.Y - 50 < yfield && move == false) || currentobj == i && move == true)
             //    {
@@ -138,7 +138,7 @@ namespace hehexd
             //        //start = end;
             //        //lastShape = MyShape.Resize;
             //    }
-        }
+        //}
 
         //private void Select(string msg)
         //{
@@ -193,6 +193,6 @@ namespace hehexd
         //    };
         //    MyCanvas.Children.Add(newLine);
         //    //lastShape = currShape;
-        }
+        //}
     }
 }

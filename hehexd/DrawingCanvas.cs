@@ -52,8 +52,10 @@ namespace hehexd
         public void mouseEnter(Point start)
         {
             ShapeExists = false;
-            activeTool.setBeginPoint(FindFigure(start), start);
-
+            AbstractFigure af = FindFigure(start);
+            activeTool.setBeginPoint(af, start);
+            if (af != null)
+            activeTool.setShape(af.rChild()); //todo: get rid of setShape
         }
 
         public void mouseOther(Point start, Point end, bool drag)
@@ -67,27 +69,27 @@ namespace hehexd
                     activeTool.setShape(newShape);
                     myCanvas.Children.Add(newShape); //canvas.add(dat)
                 }
-                else
-                {
-                   figure = FindFigure(end);
-                    if(figure != null)
-                    {
-                        //foreach (UIElement child in myCanvas.Children)
-                        //{
-                        //    Point s = figure.rStart();
-                        //    double x = Convert.ToDouble(child.GetValue(Canvas.LeftProperty));
-                        //    if (s.X == x)
-                        //    {
-                        activeTool.setShape(figure.rChild());
-                        figure.setPoints(start, end);
-                        //        break;
-                        ////    }
-                        //}
-                    }
-                }
+                //figure.setPoints(start, end);
+                //else
+                //{
+                    //figure = FindFigure(end);
+                    //if(figure != null)
+                    //{
+                //        //foreach (UIElement child in myCanvas.Children)
+                //        //{
+                //        //    Point s = figure.rStart();
+                //        //    double x = Convert.ToDouble(child.GetValue(Canvas.LeftProperty));
+                //        //    if (s.X == x)
+                //        //    {
+                        //activeTool.setShape(figure.rChild());
+                          ///figure.setPoints(start, end);
+                //        //        break;
+                //        ////    }
+                //        //}
+                //    }
+                //}
                 ICommand ic = activeTool.getCommand(end, drag);
-                if (ic != null)
-                    execute(ic);
+                if (ic != null) execute(ic);
             }
         }
 
