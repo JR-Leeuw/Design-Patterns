@@ -62,10 +62,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\DragCommand.cs" />
     <Compile Include="Commands\DrawCommand.cs" />
     <Compile Include="Commands\IRCommand.cs" />
-    <Compile Include="Commands\DragCommand.cs" />
-    <Compile Include="composite\ShapeTree.cs" />
+    <Compile Include="Commands\TempDragCommand.cs" />
+    <Compile Include="Commands\TempResizeCommand.cs" />
+    <Compile Include="composite\Group.cs" />
+    <Compile Include="composite\IComponent.cs" />
     <Compile Include="DrawingCanvas.cs" />
     <Compile Include="Figures\AbstractFigure.cs" />
     <Compile Include="Figures\EllipseFigure.cs" />
@@ -76,6 +79,10 @@
     <Compile Include="Tools\IToolNeedsShape.cs" />
     <Compile Include="Tools\RectangleTool.cs" />
     <Compile Include="Commands\TempDrawCommand.cs" />
+    <Compile Include="Tools\ResizeTool.cs" />
+    <Compile Include="Visitors\ResizeVisitor.cs" />
+    <Compile Include="Visitors\IVisitor.cs" />
+    <Compile Include="Visitors\IVisitable.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

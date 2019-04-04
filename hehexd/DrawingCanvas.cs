@@ -32,16 +32,27 @@ namespace hehexd
 
         public void execute(ICommand command)
         {
-            if (history.Contains(tempcommand) || tempcommand == null) { }
-            else
+            //if (history.Contains(tempcommand) || tempcommand == null) { }
+            //else
             //tempcommand.Delete(this);
-            command.Execute(this);
-            tempcommand = command;
-            if (command is IRCommand)
+            //command.Execute(this);
+            //tempcommand = command;
+            //if (command is IRCommand)
+            //{
+            //    history.Add((IRCommand)command);
+            //    figures.Add(command.returnshape());
+            //}c
+            if (command.ToString().Contains("Temp")) {
+
+            }
+            else
             {
                 history.Add((IRCommand)command);
-                figures.Add(command.returnshape());
             }
+            command.Execute(this);
+            figures.Add(command.returnshape());
+
+
         }
 
         public void SetActiveTool(AbstractTool tool)
@@ -55,10 +66,11 @@ namespace hehexd
             AbstractFigure af = FindFigure(start);
             activeTool.setBeginPoint(af, start);
             if (af != null)
-            activeTool.setShape(af.rChild()); //todo: get rid of setShape
+            //activeTool.setShape(af.rChild()); //todo: get rid of setShape
+            figure = FindFigure(start);
         }
 
-        public void mouseOther(Point start, Point end, bool drag)
+        public void mouseOther(Point start, Point end, bool temp)
         {
             if (activeTool.PointChanged(end))
             {
@@ -69,26 +81,28 @@ namespace hehexd
                     activeTool.setShape(newShape);
                     myCanvas.Children.Add(newShape); //canvas.add(dat)
                 }
-                //figure.setPoints(start, end);
+                    
+                if(activeTool.ToString() == "hehexd.Tools.DragTool" || activeTool.ToString() == "hehexd.Tools.ResizeTool")
+                    figure.setPoints(start, end);
                 //else
                 //{
-                    //figure = FindFigure(end);
-                    //if(figure != null)
-                    //{
+                //figure = FindFigure(end);
+                //if(figure != null)
+                //{
                 //        //foreach (UIElement child in myCanvas.Children)
                 //        //{
                 //        //    Point s = figure.rStart();
                 //        //    double x = Convert.ToDouble(child.GetValue(Canvas.LeftProperty));
                 //        //    if (s.X == x)
                 //        //    {
-                        //activeTool.setShape(figure.rChild());
-                          ///figure.setPoints(start, end);
+                //activeTool.setShape(figure.rChild());
+                ///figure.setPoints(start, end);
                 //        //        break;
                 //        ////    }
                 //        //}
                 //    }
                 //}
-                ICommand ic = activeTool.getCommand(end, drag);
+                ICommand ic = activeTool.getCommand(end, temp);
                 if (ic != null) execute(ic);
             }
         }
@@ -100,8 +114,9 @@ namespace hehexd
 
         public AbstractFigure FindFigure(Point start)
         {
-            foreach(AbstractFigure f in figures)
+            for (int i = figures.Count -1; i > -1; i--)
             {
+                var f = figures[i];
                 if (f.find(start) != null) return f;
             }
             return null;

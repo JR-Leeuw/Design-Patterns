@@ -9,31 +9,35 @@ using System.Windows.Controls;
 
 namespace hehexd.Commands
 {
-    public class DragCommand : ICommand
+    public class DragCommand : IRCommand
     {
-        //protected Point start;
-        //protected Point end;
-        private AbstractFigure figure;
 
-        public DragCommand(AbstractFigure figure)
-        {
-            this.figure= figure;
-        }
+        private AbstractFigure shape;
 
-        public void Delete(DrawingCanvas dc)
+
+        public DragCommand(AbstractFigure shape)
         {
-            
+            this.shape = shape;
         }
 
         public void Execute(DrawingCanvas dc)
         {
-            figure.Drag();
-        } 
+            //dc.GetCanvas().Children.Add(shape.GetObject());
+        }
 
-
-        AbstractFigure ICommand.returnshape()
+        public void Unexecute(DrawingCanvas dc)
         {
-            return figure;
+            //dc.GetCanvas().Children.Remove(shape.GetObject());
+        }
+
+        public void Delete(DrawingCanvas dc)
+        {
+            dc.GetCanvas().Children.RemoveAt(dc.GetCanvas().Children.Count - 1);
+        }
+
+        public AbstractFigure returnshape()
+        {
+            return shape;
         }
     }
 }

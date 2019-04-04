@@ -6,10 +6,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Shapes;
+using hehexd.composite;
+using hehexd.Visitors;
 
 namespace hehexd.Shapes
 {
-    public abstract class AbstractFigure
+    public abstract class AbstractFigure : IComponent, IVisitable
     {
         protected Point start;
         protected Point end;
@@ -25,6 +27,23 @@ namespace hehexd.Shapes
             child.SetValue(Canvas.LeftProperty, posx - nposx);
             child.SetValue(Canvas.TopProperty, posy - nposy);
             //child.SetValue(Canvas.StyleProperty, Brushes.Blue);
+        }
+
+        public void Resize()
+        {
+            double posx = Convert.ToDouble(child.GetValue(Canvas.LeftProperty));
+            double posy = Convert.ToDouble(child.GetValue(Canvas.TopProperty));
+            double height = Convert.ToDouble(child.GetValue(Canvas.HeightProperty));
+            double width = Convert.ToDouble(child.GetValue(Canvas.WidthProperty));
+            double nposx = (start.X - end.X);
+            double nposy = (start.Y - end.Y);
+            if ((height - nposy) > 0 && (width - nposx) > 0)
+            {
+                var b = child.GetValue(Canvas.HeightProperty);
+                child.SetValue(Canvas.WidthProperty, width - nposx);
+                child.SetValue(Canvas.HeightProperty, height - nposy);
+                var a = child.GetValue(Canvas.HeightProperty);
+            }
         }
 
         public void Drawshape()
@@ -86,6 +105,11 @@ namespace hehexd.Shapes
         public UIElement rChild()
         {
             return child;
+        }
+
+        public void accept(IVisitor visitor)
+        {
+            visitor.visit(this);
         }
     }
 }

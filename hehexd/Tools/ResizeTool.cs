@@ -8,23 +8,16 @@ using hehexd.Commands;
 
 namespace hehexd.Tools
 {
-    public class DragTool : AbstractTool
+    public class ResizeTool : AbstractTool
     {
         public override ICommand getCommand(Point end, bool temporary)
         {
             if (abstractFigure != null)
             {
-                if (temporary)
-                {
-                    return new TempDragCommand(this.abstractFigure);
-                }
-                else
-                {
-                    return new DragCommand(this.abstractFigure);
-                }
+                return new TempResizeCommand(this.abstractFigure);
             }
             else
-            return null;
+                return null;
         }
     }
 }

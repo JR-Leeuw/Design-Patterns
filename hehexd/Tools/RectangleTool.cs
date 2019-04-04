@@ -26,7 +26,7 @@ namespace hehexd.Tools
 
         public UIElement getShape()
         {
-            return new Rectangle() { Width = 0, Height = 0, Fill = Brushes.Black, };
+            return new Rectangle() { Width = 0, Height = 0, Fill = Brushes.Black, Stroke = Brushes.White, StrokeThickness = 4, };
         }
     }
 }
