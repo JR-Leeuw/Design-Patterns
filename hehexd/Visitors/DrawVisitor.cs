@@ -8,13 +8,13 @@ using hehexd.Shapes;
 
 namespace hehexd.Visitors
 {
-    class ResizeVisitor : IVisitor
+    class DrawVisitor : IVisitor
     {
-        public ResizeVisitor(){ }
+        public DrawVisitor() { }
 
         public void visit(AbstractFigure figure)
         {
-            figure.Resize();
+            figure.Drawshape();
         }
 
         public void visit(Group group)

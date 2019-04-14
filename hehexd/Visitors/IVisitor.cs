@@ -11,5 +11,6 @@ namespace hehexd.Visitors
     public interface IVisitor
     {
         void visit(AbstractFigure figure);
+        void visit(Group group);
     }
 }

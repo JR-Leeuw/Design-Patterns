@@ -1,5 +1,6 @@
 ﻿using hehexd.Commands;
 using hehexd.Shapes;
+using hehexd.Visitors;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -18,7 +19,7 @@ namespace hehexd.Tools
 
         public void Execute(DrawingCanvas dc)
         {
-            figure.Drawshape();
+            figure.accept(new DrawVisitor());
         }
 
         public void Delete(DrawingCanvas dc)

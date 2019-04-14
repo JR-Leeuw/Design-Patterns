@@ -14,7 +14,15 @@ namespace hehexd.Tools
         {
             if (abstractFigure != null)
             {
-                return new TempResizeCommand(this.abstractFigure);
+                if (temporary)
+                {
+                    return new TempResizeCommand(this.abstractFigure);
+                }
+                else
+                {
+                    return new ResizeCommand(this.abstractFigure);
+                }
+                
             }
             else
                 return null;

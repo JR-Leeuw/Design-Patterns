@@ -10,24 +10,30 @@ using System.Windows.Controls;
 
 namespace hehexd.Commands
 {
-    public class TempDragCommand : IRCommand
+    public class ResizeCommand : IRCommand
     {
- 
+        //protected Point start;
+        //protected Point end;
         private AbstractFigure figure;
 
-        public TempDragCommand(AbstractFigure figure)
+        public ResizeCommand(AbstractFigure figure)
         {
-            this.figure= figure;
+            this.figure = figure;
         }
 
         public void Delete(DrawingCanvas dc)
         {
-            
+
         }
 
         public void Execute(DrawingCanvas dc)
         {
-            figure.accept(new MoveVisitor());
+            //figure.accept(new ResizeVisitor());
+        }
+
+        public AbstractFigure returnshape()
+        {
+            throw new NotImplementedException();
         }
 
         public void Unexecute(DrawingCanvas dc)

@@ -1,4 +1,5 @@
 ﻿using hehexd.Shapes;
+using hehexd.Visitors;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace hehexd.composite
 {
-    class Group : IComponent
+    public class Group : IComponent
     {
         public static string FigureType = "group";
         private List<IComponent> figures;
@@ -42,21 +43,21 @@ namespace hehexd.composite
         //    return null;
         //}
 
-        public void Drawshape()
-        {
-            foreach(IComponent figure in figures)
-            {
-                figure.Drawshape();
-            }
-        }
+        //public void Drawshape()
+        //{
+        //    foreach(IComponent figure in figures)
+        //    {
+        //        figure.Drawshape();
+        //    }
+        //}
 
-        public void Drag()
-        {
-            foreach(IComponent figure in figures)
-            {
-                figure.Drag();
-            }
-        }
+        //public void Drag()
+        //{
+        //    foreach(IComponent figure in figures)
+        //    {
+        //        figure.Drag();
+        //    }
+        //}
 
         public Group findGroup(IComponent figure)
         {
@@ -71,6 +72,11 @@ namespace hehexd.composite
                 }
             }
             return null;
+        }
+
+        public void accept(IVisitor visitor)
+        {
+            visitor.visit(this);
         }
     }
 }

@@ -65,6 +65,7 @@
     <Compile Include="Commands\DragCommand.cs" />
     <Compile Include="Commands\DrawCommand.cs" />
     <Compile Include="Commands\IRCommand.cs" />
+    <Compile Include="Commands\ResizeCommand.cs" />
     <Compile Include="Commands\TempDragCommand.cs" />
     <Compile Include="Commands\TempResizeCommand.cs" />
     <Compile Include="composite\Group.cs" />
@@ -73,6 +74,9 @@
     <Compile Include="Figures\AbstractFigure.cs" />
     <Compile Include="Figures\EllipseFigure.cs" />
     <Compile Include="Figures\RectangleFigure.cs" />
+    <Compile Include="Strategy\OperationEllipse.cs" />
+    <Compile Include="Strategy\OperationRectangle.cs" />
+    <Compile Include="Strategy\Strategy.cs" />
     <Compile Include="Tools\AbstractTool.cs" />
     <Compile Include="Tools\DragTool.cs" />
     <Compile Include="Tools\EllipseTool.cs" />
@@ -80,6 +84,9 @@
     <Compile Include="Tools\RectangleTool.cs" />
     <Compile Include="Commands\TempDrawCommand.cs" />
     <Compile Include="Tools\ResizeTool.cs" />
+    <Compile Include="Visitors\DeleteVisitor.cs" />
+    <Compile Include="Visitors\DrawVisitor.cs" />
+    <Compile Include="Visitors\MoveVisitor.cs" />
     <Compile Include="Visitors\ResizeVisitor.cs" />
     <Compile Include="Visitors\IVisitor.cs" />
     <Compile Include="Visitors\IVisitable.cs" />
