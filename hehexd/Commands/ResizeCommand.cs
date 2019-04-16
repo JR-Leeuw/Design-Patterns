@@ -12,13 +12,14 @@ namespace hehexd.Commands
 {
     public class ResizeCommand : IRCommand
     {
-        //protected Point start;
-        //protected Point end;
         private AbstractFigure figure;
+        private Point start, end;
 
         public ResizeCommand(AbstractFigure figure)
         {
             this.figure = figure;
+            this.start = figure.rBStart();
+            this.end = figure.rEnd();
         }
 
         public void Delete(DrawingCanvas dc)
@@ -28,12 +29,12 @@ namespace hehexd.Commands
 
         public void Execute(DrawingCanvas dc)
         {
-            //figure.accept(new ResizeVisitor());
+            figure.accept(new ResizeVisitor("e", start, end));
         }
 
         public void ReExecute(DrawingCanvas dc)
         {
-            figure.accept(new ResizeVisitor("r"));
+            figure.accept(new ResizeVisitor("r", start, end));
         }
 
         public AbstractFigure returnshape()
@@ -43,7 +44,7 @@ namespace hehexd.Commands
 
         public void Unexecute(DrawingCanvas dc)
         {
-            figure.accept(new ResizeVisitor("u"));
+            figure.accept(new ResizeVisitor("u", start, end));
         }
 
         AbstractFigure ICommand.returnshape()

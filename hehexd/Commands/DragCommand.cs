@@ -14,21 +14,24 @@ namespace hehexd.Commands
     {
 
         private AbstractFigure shape;
+        private Point start, end;
 
 
         public DragCommand(AbstractFigure shape)
         {
             this.shape = shape;
+            this.start = shape.rBStart();
+            this.end = shape.rEnd();
         }
 
         public void Execute(DrawingCanvas dc)
         {
-            shape.accept(new MoveVisitor("e"));
+            shape.accept(new MoveVisitor("e", start, end));
         }
 
         public void Unexecute(DrawingCanvas dc)
         {
-            shape.accept(new MoveVisitor("u"));
+            shape.accept(new MoveVisitor("u", start, end));
         }
 
         public void Delete(DrawingCanvas dc)
@@ -43,7 +46,7 @@ namespace hehexd.Commands
 
         public void ReExecute(DrawingCanvas dc)
         {
-            shape.accept(new MoveVisitor("r"));
+            shape.accept(new MoveVisitor("r", start, end));
         }
     }
 }

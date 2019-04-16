@@ -12,13 +12,14 @@ namespace hehexd.Commands
 {
     public class TempResizeCommand : IRCommand
     {
-        //protected Point start;
-        //protected Point end;
         private AbstractFigure figure;
+        private Point start, end;
 
         public TempResizeCommand(AbstractFigure figure)
         {
             this.figure = figure;
+            this.start = figure.rBStart();
+            this.end = figure.rEnd();
         }
 
         public void Delete(DrawingCanvas dc)
@@ -28,7 +29,7 @@ namespace hehexd.Commands
 
         public void Execute(DrawingCanvas dc)
         {
-            figure.accept(new ResizeVisitor("e"));
+            figure.accept(new ResizeVisitor("e", start, end));
         }
 
         public void ReExecute(DrawingCanvas dc)

@@ -14,10 +14,13 @@ namespace hehexd.Commands
     {
  
         private AbstractFigure figure;
+        private Point start, end;
 
         public TempDragCommand(AbstractFigure figure)
         {
             this.figure= figure;
+            this.start = figure.rBStart();
+            this.end = figure.rEnd();
         }
 
         public void Delete(DrawingCanvas dc)
@@ -27,7 +30,7 @@ namespace hehexd.Commands
 
         public void Execute(DrawingCanvas dc)
         {
-            figure.accept(new MoveVisitor("e"));
+            figure.accept(new MoveVisitor("e", start, end));
         }
 
         public void ReExecute(DrawingCanvas dc)

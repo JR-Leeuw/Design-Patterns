@@ -22,7 +22,7 @@ namespace hehexd.Shapes
 
         public abstract Shape GetObject();
 
-        public void Drag(string s)
+        public void Drag(string s, Point Start, Point End)
         {
             Point a;
             Point b;
@@ -38,8 +38,8 @@ namespace hehexd.Shapes
             }
             else
             {
-                a = end;
-                b = BaseStart;
+                a = End;
+                b = Start;
             }
 
             double posx = Convert.ToDouble(child.GetValue(Canvas.LeftProperty));
@@ -51,7 +51,7 @@ namespace hehexd.Shapes
             //child.SetValue(Canvas.StyleProperty, Brushes.Blue);
         }
 
-        public void Resize(string s)
+        public void Resize(string s, Point Start, Point End)
         {
 
             Point a;
@@ -68,8 +68,8 @@ namespace hehexd.Shapes
             }
             else
             {
-                a = end;
-                b = BaseStart;
+                a = End;
+                b = Start;
             }
 
             double posx = Convert.ToDouble(child.GetValue(Canvas.LeftProperty));
@@ -135,6 +135,11 @@ namespace hehexd.Shapes
         public Point rEnd()
         {
             return end;
+        }
+
+        public Point rBStart()
+        {
+            return BaseStart;
         }
 
         public void setPoints(Point start, Point end)

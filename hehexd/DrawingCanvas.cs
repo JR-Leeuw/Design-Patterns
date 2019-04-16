@@ -42,11 +42,13 @@ namespace hehexd
             {
                 Cindex = Cindex + 1;
                 history_updater();
+                AbstractFigure shape = command.returnshape();
+                if(command.ToString().Contains("draw"))
+                shape.setindex(Cindex);
                 history.Add((IRCommand)command);
                 //gfigures.add(command.returnshape());
-                var shape = command.returnshape();
                 figures.Add(shape);
-                shape.setindex(Cindex);
+
             }
             command.Execute(this);
         }
