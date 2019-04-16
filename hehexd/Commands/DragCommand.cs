@@ -1,4 +1,5 @@
 ﻿using hehexd.Shapes;
+using hehexd.Visitors;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,12 +23,12 @@ namespace hehexd.Commands
 
         public void Execute(DrawingCanvas dc)
         {
-            //dc.GetCanvas().Children.Add(shape.GetObject());
+            shape.accept(new MoveVisitor("e"));
         }
 
         public void Unexecute(DrawingCanvas dc)
         {
-            //dc.GetCanvas().Children.Remove(shape.GetObject());
+            shape.accept(new MoveVisitor("u"));
         }
 
         public void Delete(DrawingCanvas dc)
@@ -38,6 +39,11 @@ namespace hehexd.Commands
         public AbstractFigure returnshape()
         {
             return shape;
+        }
+
+        public void ReExecute(DrawingCanvas dc)
+        {
+            shape.accept(new MoveVisitor("r"));
         }
     }
 }

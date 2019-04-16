@@ -13,36 +13,77 @@ namespace hehexd.Shapes
 {
     public abstract class AbstractFigure : IComponent, IVisitable
     {
+        protected Point BaseStart;
         protected Point start;
         protected Point end;
+
         protected UIElement child;
+        protected int canvasindex;
 
         public abstract Shape GetObject();
-        public void Drag()
+
+        public void Drag(string s)
         {
+            Point a;
+            Point b;
+            if (s == "e")
+            {
+                a = start;
+                b = end;
+            }
+            else if(s == "r")
+            {
+                a = BaseStart;
+                b = end;
+            }
+            else
+            {
+                a = end;
+                b = BaseStart;
+            }
+
             double posx = Convert.ToDouble(child.GetValue(Canvas.LeftProperty));
             double posy = Convert.ToDouble(child.GetValue(Canvas.TopProperty));
-            double nposx = (start.X - end.X);
-            double nposy = (start.Y - end.Y);
+            double nposx = (a.X - b.X);
+            double nposy = (a.Y - b.Y);
             child.SetValue(Canvas.LeftProperty, posx - nposx);
             child.SetValue(Canvas.TopProperty, posy - nposy);
             //child.SetValue(Canvas.StyleProperty, Brushes.Blue);
         }
 
-        public void Resize()
+        public void Resize(string s)
         {
+
+            Point a;
+            Point b;
+            if(s == "e")
+            {
+                 a = start;
+                 b = end;
+            }
+            else if (s == "r")
+            {
+                a = BaseStart;
+                b = end;
+            }
+            else
+            {
+                a = end;
+                b = BaseStart;
+            }
+
             double posx = Convert.ToDouble(child.GetValue(Canvas.LeftProperty));
             double posy = Convert.ToDouble(child.GetValue(Canvas.TopProperty));
             double height = Convert.ToDouble(child.GetValue(Canvas.HeightProperty));
             double width = Convert.ToDouble(child.GetValue(Canvas.WidthProperty));
-            double nposx = (start.X - end.X);
-            double nposy = (start.Y - end.Y);
+            double nposx = (a.X - b.X);
+            double nposy = (a.Y - b.Y);
             if ((height - nposy) > 0 && (width - nposx) > 0)
             {
-                var b = child.GetValue(Canvas.HeightProperty);
+                //var b = child.GetValue(Canvas.HeightProperty);
                 child.SetValue(Canvas.WidthProperty, width - nposx);
                 child.SetValue(Canvas.HeightProperty, height - nposy);
-                var a = child.GetValue(Canvas.HeightProperty);
+               //var a = child.GetValue(Canvas.HeightProperty);
             }
         }
 
@@ -102,9 +143,24 @@ namespace hehexd.Shapes
             this.end = end;
         }
 
+        public void SetBaseStart(Point Bstart)
+        {
+            this.BaseStart = Bstart;
+        }
+
         public UIElement rChild()
         {
             return child;
+        }
+
+        public void setindex(int i)
+        {
+            canvasindex = i;
+        }
+
+        public int getindex()
+        {
+            return canvasindex;
         }
 
         public void accept(IVisitor visitor)

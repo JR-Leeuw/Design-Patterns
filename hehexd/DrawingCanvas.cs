@@ -24,6 +24,9 @@ namespace hehexd
         private List<AbstractFigure> figures = new List<AbstractFigure>();
         private bool ShapeExists;
         private AbstractFigure figure;
+        private Group gfigures = new Group();
+        public Group activeGroup;
+        private int Cindex = -1;
 
         public DrawingCanvas(Canvas myCanvas)
         {
@@ -32,27 +35,20 @@ namespace hehexd
 
         public void execute(ICommand command)
         {
-            //if (history.Contains(tempcommand) || tempcommand == null) { }
-            //else
-            //tempcommand.Delete(this);
-            //command.Execute(this);
-            //tempcommand = command;
-            //if (command is IRCommand)
-            //{
-            //    history.Add((IRCommand)command);
-            //    figures.Add(command.returnshape());
-            //}c
             if (command.ToString().Contains("Temp")) {
 
             }
             else
             {
+                Cindex = Cindex + 1;
+                history_updater();
                 history.Add((IRCommand)command);
+                //gfigures.add(command.returnshape());
+                var shape = command.returnshape();
+                figures.Add(shape);
+                shape.setindex(Cindex);
             }
             command.Execute(this);
-            figures.Add(command.returnshape());
-
-
         }
 
         public void SetActiveTool(AbstractTool tool)
@@ -66,8 +62,11 @@ namespace hehexd
             AbstractFigure af = FindFigure(start);
             activeTool.setBeginPoint(af, start);
             if (af != null)
-            //activeTool.setShape(af.rChild()); //todo: get rid of setShape
-            figure = FindFigure(start);
+            {
+                //activeTool.setShape(af.rChild()); //todo: get rid of setShape
+                figure = FindFigure(start);
+                figure.SetBaseStart(start);
+            }
         }
 
         public void mouseOther(Point start, Point end, bool temp)
@@ -82,26 +81,8 @@ namespace hehexd
                     myCanvas.Children.Add(newShape); //canvas.add(dat)
                 }
                     
-                if(activeTool.ToString() == "hehexd.Tools.DragTool" || activeTool.ToString() == "hehexd.Tools.ResizeTool")
+                if(activeTool.ToString().Contains("DragTool") || activeTool.ToString().Contains("ResizeTool"))
                     figure.setPoints(start, end);
-                //else
-                //{
-                //figure = FindFigure(end);
-                //if(figure != null)
-                //{
-                //        //foreach (UIElement child in myCanvas.Children)
-                //        //{
-                //        //    Point s = figure.rStart();
-                //        //    double x = Convert.ToDouble(child.GetValue(Canvas.LeftProperty));
-                //        //    if (s.X == x)
-                //        //    {
-                //activeTool.setShape(figure.rChild());
-                ///figure.setPoints(start, end);
-                //        //        break;
-                //        ////    }
-                //        //}
-                //    }
-                //}
                 ICommand ic = activeTool.getCommand(end, temp);
                 if (ic != null) execute(ic);
             }
@@ -120,6 +101,36 @@ namespace hehexd
                 if (f.find(start) != null) return f;
             }
             return null;
+        }
+
+        public void Undo()
+        {
+            if (Cindex > -1)
+            {
+                IRCommand c = history[Cindex];
+                c.Unexecute(this);
+                Cindex = Cindex - 1;
+            }
+        }
+
+        public void Redo()
+        {
+            if (Cindex < history.Count - 1)
+            {
+                Cindex = Cindex + 1;
+                history[Cindex].ReExecute(this);
+            }
+        }
+
+        public void history_updater()
+        {
+            if (Cindex < history.Count)
+            {
+                for (int i = Cindex; i < history.Count;)
+                {
+                    history.RemoveAt(i);
+                }
+            }
         }
     }
 }

@@ -31,6 +31,11 @@ namespace hehexd.Commands
             //figure.accept(new ResizeVisitor());
         }
 
+        public void ReExecute(DrawingCanvas dc)
+        {
+            figure.accept(new ResizeVisitor("r"));
+        }
+
         public AbstractFigure returnshape()
         {
             throw new NotImplementedException();
@@ -38,7 +43,7 @@ namespace hehexd.Commands
 
         public void Unexecute(DrawingCanvas dc)
         {
-            throw new NotImplementedException();
+            figure.accept(new ResizeVisitor("u"));
         }
 
         AbstractFigure ICommand.returnshape()

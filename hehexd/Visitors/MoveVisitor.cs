@@ -10,11 +10,16 @@ namespace hehexd.Visitors
 {
     class MoveVisitor : IVisitor
     {
-        public MoveVisitor() { }
+        string command;
+
+        public MoveVisitor(string s)
+        {
+            this.command = s;
+        }
 
         public void visit(AbstractFigure figure)
         {
-            figure.Drag();
+            figure.Drag(command);
         }
 
         public void visit(Group group)

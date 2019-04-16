@@ -10,11 +10,16 @@ namespace hehexd.Visitors
 {
     class ResizeVisitor : IVisitor
     {
-        public ResizeVisitor(){ }
+        string command;
+
+        public ResizeVisitor(string s)
+        {
+            this.command = s;
+        }
 
         public void visit(AbstractFigure figure)
         {
-            figure.Resize();
+            figure.Resize(command);
         }
 
         public void visit(Group group)

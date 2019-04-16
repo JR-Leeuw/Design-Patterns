@@ -8,6 +8,7 @@ namespace hehexd.Commands
 {
     public interface IRCommand : ICommand
     {
+        void ReExecute(DrawingCanvas dc);
         void Unexecute(DrawingCanvas dc);
     }
 }

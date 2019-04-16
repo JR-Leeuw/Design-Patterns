@@ -53,9 +53,9 @@ namespace hehexd.composite
 
         //public void Drag()
         //{
-        //    foreach(IComponent figure in figures)
+        //    foreach (IComponent figure in figures)
         //    {
-        //        figure.Drag();
+        //        figure.accept(new MoveVisitor());
         //    }
         //}
 

@@ -28,7 +28,12 @@ namespace hehexd.Commands
 
         public void Execute(DrawingCanvas dc)
         {
-            figure.accept(new ResizeVisitor());
+            figure.accept(new ResizeVisitor("e"));
+        }
+
+        public void ReExecute(DrawingCanvas dc)
+        {
+            throw new NotImplementedException();
         }
 
         public AbstractFigure returnshape()

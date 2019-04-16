@@ -27,7 +27,12 @@ namespace hehexd.Commands
 
         public void Execute(DrawingCanvas dc)
         {
-            figure.accept(new MoveVisitor());
+            figure.accept(new MoveVisitor("e"));
+        }
+
+        public void ReExecute(DrawingCanvas dc)
+        {
+            throw new NotImplementedException();
         }
 
         public void Unexecute(DrawingCanvas dc)

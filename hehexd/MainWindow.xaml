@@ -7,7 +7,9 @@
         mc:Ignorable="d"
         Title="MainWindow"
         SizeToContent="WidthAndHeight" Topmost="False"
-        WindowState="Maximized" WindowStartupLocation="CenterScreen" MinWidth="1920" MinHeight="1080">
+        WindowState="Maximized" WindowStartupLocation="CenterScreen" MinWidth="1920" MinHeight="1080"
+        KeyDown="OnKeyDownHandler"
+        >
     <DockPanel>
         <ToolBar Name="MyToolBar" DockPanel.Dock="Top"
                  Height="50">
@@ -32,6 +34,5 @@
           Canvas.Left="240" Canvas.Top="20"/>-->
 
         </Canvas>
-
     </DockPanel>
 </Window>

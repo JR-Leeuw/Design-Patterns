@@ -13,6 +13,7 @@ namespace hehexd.Commands
     {
 
         private AbstractFigure shape;
+        bool exists = true;
 
 
         public DrawCommand(AbstractFigure shape)
@@ -22,12 +23,18 @@ namespace hehexd.Commands
 
         public void Execute(DrawingCanvas dc)
         {
-            //dc.GetCanvas().Children.Add(shape.GetObject());
+            if (exists == false)
+            {
+                dc.GetCanvas().Children.Insert(shape.getindex(), shape.rChild());
+
+            }
+            else { }
         }
 
         public void Unexecute(DrawingCanvas dc)
         {
-            //dc.GetCanvas().Children.Remove(shape.GetObject());
+            exists = false;
+            dc.GetCanvas().Children.Remove(shape.rChild());
         }
 
         public void Delete(DrawingCanvas dc)
@@ -38,6 +45,11 @@ namespace hehexd.Commands
         public AbstractFigure returnshape()
         {
             return shape;
+        }
+
+        public void ReExecute(DrawingCanvas dc)
+        {
+            dc.GetCanvas().Children.Insert(shape.getindex(), shape.rChild());
         }
     }
 }
