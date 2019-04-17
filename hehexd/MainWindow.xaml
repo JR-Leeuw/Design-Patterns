@@ -3,7 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xctk="http://schemas/xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:hehexd"
+        xmlns:xctk1="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         Title="MainWindow"
         SizeToContent="WidthAndHeight" Topmost="False"
@@ -20,6 +22,7 @@
             <RadioButton Name="DeleteButton" Content="Delete" GroupName="ShapeGroup" Click="DeleteButton_Click"/>
             <RadioButton Name="DragButton" Content="Drag" GroupName="ShapeGroup" Click="DragButton_Click"/>
             <RadioButton Name="ResizeButton" Content="Resize" GroupName="ShapeGroup" Click="ResizeButton_Click"/>
+            <xctk1:ColorPicker Name="cp" DisplayColorAndName="True" SelectedColorChanged="cp_SelectedColorChanged_1" AvailableColorsSortingMode="HueSaturationBrightness" ></xctk1:ColorPicker>
             
             
         </ToolBar>

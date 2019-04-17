@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Shapes;
 using System.Windows.Controls;
 using System.Windows.Media;
+using hehexd.Visitors;
 
 namespace hehexd
 {
@@ -22,12 +23,17 @@ namespace hehexd
 
         public override Shape GetObject()
         {
-            Rectangle newRectangle = new Rectangle() {
-                Fill = Brushes.Black,
-                Stroke = Brushes.White,
-                StrokeThickness  = 4
-            };
+            Rectangle newRectangle = new Rectangle(); //{
+            //    Fill = Brushes.Black,
+            //    Stroke = Brushes.White,
+            //    StrokeThickness  = 4
+            //};
             return newRectangle;
+        }
+
+        public override void accept(IVisitor visitor)
+        {
+            visitor.visit(this);
         }
     }
 }

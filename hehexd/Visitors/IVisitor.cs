@@ -1,4 +1,5 @@
 ﻿using hehexd.composite;
+using hehexd.Figures;
 using hehexd.Shapes;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,9 @@ namespace hehexd.Visitors
 {
     public interface IVisitor
     {
-        void visit(AbstractFigure figure);
+        void visit(BaseFigure BaseFigure);
+        void visit(RectangleShape shape);
+        void visit(EllipseShape shape);
         void visit(Group group);
     }
 }

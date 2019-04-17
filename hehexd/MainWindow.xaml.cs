@@ -1,6 +1,7 @@
 ﻿using hehexd.Tools;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,14 +26,14 @@ namespace hehexd
 
         private AbstractTool activeTool = new RectangleTool();
         string tool = "";
-        private DrawingCanvas drawingCanvas;
+        private DrawingCanvas drawingCanvas = DrawingCanvas.getinstance();
         Point start;
         Point end;
 
         public MainWindow()
         {
             InitializeComponent();
-            drawingCanvas = new DrawingCanvas(MyCanvas);
+            drawingCanvas.setCanvas(MyCanvas);
         }
 
         public void hotkeys(RoutedCommand r)
@@ -60,12 +61,12 @@ namespace hehexd
 
         private void SelectButton_Click(object sender, RoutedEventArgs e)
         {
-
+            drawingCanvas.SetActiveTool(new PaintTool());
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-
+            drawingCanvas.SetActiveTool(new DeleteTool());
         }
 
         private void DragButton_Click(object sender, RoutedEventArgs e)
@@ -80,15 +81,17 @@ namespace hehexd
 
         private void OnKeyDownHandler(object sender, KeyEventArgs e)
         { 
-            if (e.Key == Key.Z)
+            if (e.Key == Key.Z){ drawingCanvas.Undo(); }
+
+            if (e.Key == Key.Y) { drawingCanvas.Redo(); }
+
+            if (e.Key == Key.S)
             {
-                drawingCanvas.Undo();
+                File.Create(@"C:\Users\lhmbe\Desktop\save.txt").Close();
+                drawingCanvas.Save();
             }
 
-            if (e.Key == Key.Y)
-            {
-                drawingCanvas.Redo();
-            }
+            if (e.Key == Key.L) { drawingCanvas.Load(); }
         }
 
         private void MyCanvas_MouseDown(object sender, MouseButtonEventArgs e)
@@ -108,11 +111,20 @@ namespace hehexd
         {         
             if (e.GetPosition(MyCanvas) != end && e.LeftButton == MouseButtonState.Pressed)
             {
-                string s = activeTool.ToString();
+                //string s = activeTool.ToString();
                 end = e.GetPosition(MyCanvas);
                 drawingCanvas.mouseOther(start, end, true);
                 start = end;
             } 
+        }
+
+        private void cp_SelectedColorChanged_1(object sender, RoutedPropertyChangedEventArgs<Color?> e)
+        {
+            if (cp.SelectedColor.HasValue)
+            {
+                Color c = cp.SelectedColor.Value;
+                drawingCanvas.SetColor(c);
+            }
         }
     }
 }

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using hehexd.Commands;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using hehexd.Strategy;
 
 namespace hehexd.Tools
 {
@@ -26,7 +27,8 @@ namespace hehexd.Tools
 
         public UIElement getShape()
         {
-            return new Rectangle() { Width = 0, Height = 0, Fill = Brushes.Black, Stroke = Brushes.White, StrokeThickness = 4, };
+            //return new Rectangle() { Width = 0, Height = 0, Fill = Brushes.Black, Stroke = Brushes.White, StrokeThickness = 1, };
+            return new DrawRectangle().doOperation();
         }
     }
 }

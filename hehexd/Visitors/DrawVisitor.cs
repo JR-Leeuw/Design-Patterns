@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using hehexd.composite;
+using hehexd.Figures;
 using hehexd.Shapes;
 
 namespace hehexd.Visitors
@@ -12,14 +13,24 @@ namespace hehexd.Visitors
     {
         public DrawVisitor() { }
 
-        public void visit(AbstractFigure figure)
+        public void visit(RectangleShape shape)
         {
-            figure.Drawshape();
+            shape.Drawshape();
+        }
+
+        public void visit(EllipseShape shape)
+        {
+            shape.Drawshape();
         }
 
         public void visit(Group group)
         {
             throw new NotImplementedException();
+        }
+
+        public void visit(BaseFigure BaseFigure)
+        {
+            BaseFigure.Drawshape();
         }
     }
 }

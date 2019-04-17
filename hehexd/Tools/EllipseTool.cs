@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using hehexd.Commands;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using hehexd.Strategy;
 
 namespace hehexd.Tools
 {
@@ -26,7 +27,7 @@ namespace hehexd.Tools
 
         public UIElement getShape()
         {
-            return new Ellipse() { Width = 0, Height = 0, Fill = Brushes.Black, };
+            return new DrawEllipse().doOperation();
         }
     }
 }

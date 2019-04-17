@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace hehexd.composite
 {
@@ -43,22 +44,6 @@ namespace hehexd.composite
         //    return null;
         //}
 
-        //public void Drawshape()
-        //{
-        //    foreach(IComponent figure in figures)
-        //    {
-        //        figure.Drawshape();
-        //    }
-        //}
-
-        //public void Drag()
-        //{
-        //    foreach (IComponent figure in figures)
-        //    {
-        //        figure.accept(new MoveVisitor());
-        //    }
-        //}
-
         public Group findGroup(IComponent figure)
         {
             foreach (IComponent f in figures)
@@ -77,6 +62,11 @@ namespace hehexd.composite
         public void accept(IVisitor visitor)
         {
             visitor.visit(this);
+        }
+
+        public UIElement GetChild()
+        {
+            throw new NotImplementedException();
         }
     }
 }

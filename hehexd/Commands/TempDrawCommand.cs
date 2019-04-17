@@ -22,11 +22,6 @@ namespace hehexd.Tools
             figure.accept(new DrawVisitor());
         }
 
-        public void Delete(DrawingCanvas dc)
-        {
-            //dc.GetCanvas().Children.RemoveAt(dc.GetCanvas().Children.Count - 1);
-        }
-
         AbstractFigure ICommand.returnshape()
         {
             return figure;

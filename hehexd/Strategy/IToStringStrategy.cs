@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace hehexd.Visitors
+namespace hehexd.Strategy
 {
-    class DeleteVisitor
+    public interface IToStringStrategy
     {
+        string doOperation();
     }
 }

@@ -1,4 +1,5 @@
 ﻿using hehexd.Shapes;
+using hehexd.Visitors;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,7 @@ namespace hehexd.Commands
         {
             if (exists == false)
             {
-                dc.GetCanvas().Children.Insert(shape.getindex(), shape.rChild());
+                shape.accept(new DrawVisitor());
 
             }
             else { }
@@ -35,11 +36,6 @@ namespace hehexd.Commands
         {
             exists = false;
             dc.GetCanvas().Children.Remove(shape.rChild());
-        }
-
-        public void Delete(DrawingCanvas dc)
-        {
-            dc.GetCanvas().Children.RemoveAt(dc.GetCanvas().Children.Count - 1);
         }
 
         public AbstractFigure returnshape()

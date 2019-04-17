@@ -34,11 +34,6 @@ namespace hehexd.Commands
             shape.accept(new MoveVisitor("u", start, end));
         }
 
-        public void Delete(DrawingCanvas dc)
-        {
-            dc.GetCanvas().Children.RemoveAt(dc.GetCanvas().Children.Count - 1);
-        }
-
         public AbstractFigure returnshape()
         {
             return shape;

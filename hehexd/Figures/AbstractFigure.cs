@@ -8,11 +8,16 @@ using System.Threading.Tasks;
 using System.Windows.Shapes;
 using hehexd.composite;
 using hehexd.Visitors;
+using System.Windows.Media;
 
 namespace hehexd.Shapes
 {
     public abstract class AbstractFigure : IComponent, IVisitable
     {
+
+        public abstract void accept(IVisitor visitor);
+        DrawingCanvas dc;
+
         protected Point BaseStart;
         protected Point start;
         protected Point end;
@@ -33,8 +38,8 @@ namespace hehexd.Shapes
             }
             else if(s == "r")
             {
-                a = BaseStart;
-                b = end;
+                a = Start;
+                b = End;
             }
             else
             {
@@ -48,7 +53,6 @@ namespace hehexd.Shapes
             double nposy = (a.Y - b.Y);
             child.SetValue(Canvas.LeftProperty, posx - nposx);
             child.SetValue(Canvas.TopProperty, posy - nposy);
-            //child.SetValue(Canvas.StyleProperty, Brushes.Blue);
         }
 
         public void Resize(string s, Point Start, Point End)
@@ -63,8 +67,8 @@ namespace hehexd.Shapes
             }
             else if (s == "r")
             {
-                a = BaseStart;
-                b = end;
+                a = Start;
+                b = End;
             }
             else
             {
@@ -80,10 +84,8 @@ namespace hehexd.Shapes
             double nposy = (a.Y - b.Y);
             if ((height - nposy) > 0 && (width - nposx) > 0)
             {
-                //var b = child.GetValue(Canvas.HeightProperty);
                 child.SetValue(Canvas.WidthProperty, width - nposx);
                 child.SetValue(Canvas.HeightProperty, height - nposy);
-               //var a = child.GetValue(Canvas.HeightProperty);
             }
         }
 
@@ -112,6 +114,12 @@ namespace hehexd.Shapes
                 child.SetValue(Canvas.TopProperty, end.Y);
                 child.SetValue(Canvas.HeightProperty, start.Y - end.Y);
             }
+        }
+
+        public void Paint(Color c)
+        {
+            SolidColorBrush brush = new SolidColorBrush(c);
+            child.SetValue(Canvas.BackgroundProperty, brush);
         }
 
         public AbstractFigure find(Point punt)
@@ -168,9 +176,14 @@ namespace hehexd.Shapes
             return canvasindex;
         }
 
-        public void accept(IVisitor visitor)
+        public UIElement GetChild()
         {
-            visitor.visit(this);
+            return child;
+        }
+
+        public void SetChild(UIElement c)
+        {
+            this.child = c;
         }
     }
 }

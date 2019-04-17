@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using hehexd.composite;
+using hehexd.Figures;
 using hehexd.Shapes;
 
 namespace hehexd.Visitors
@@ -21,14 +22,28 @@ namespace hehexd.Visitors
             this.end = end;
         }
 
-        public void visit(AbstractFigure figure)
-        {
-            figure.Resize(command, start, end);
-        }
-
         public void visit(Group group)
         {
-            throw new NotImplementedException();
+            List<IComponent> figures = group.returnFigures();
+            foreach (IComponent figure in figures)
+            {
+                figure.accept(this);
+            }
+        }
+
+        public void visit(RectangleShape shape)
+        {
+            shape.Resize(command, start, end);
+        }
+
+        public void visit(EllipseShape shape)
+        {
+            shape.Resize(command, start, end);
+        }
+
+        public void visit(BaseFigure BaseFigure)
+        {
+            BaseFigure.Resize(command, start, end);
         }
     }
 }

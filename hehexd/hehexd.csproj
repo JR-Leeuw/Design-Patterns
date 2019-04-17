@@ -56,40 +56,65 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.5.0\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.5.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.5.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.5.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.5.0\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\DeleteCommand.cs" />
     <Compile Include="Commands\DragCommand.cs" />
     <Compile Include="Commands\DrawCommand.cs" />
     <Compile Include="Commands\IRCommand.cs" />
+    <Compile Include="Commands\PaintCommand.cs" />
     <Compile Include="Commands\ResizeCommand.cs" />
+    <Compile Include="Commands\SaveCommand.cs" />
     <Compile Include="Commands\TempDragCommand.cs" />
     <Compile Include="Commands\TempResizeCommand.cs" />
     <Compile Include="composite\Group.cs" />
     <Compile Include="composite\IComponent.cs" />
     <Compile Include="DrawingCanvas.cs" />
     <Compile Include="Figures\AbstractFigure.cs" />
+    <Compile Include="Figures\BaseFigure.cs" />
     <Compile Include="Figures\EllipseFigure.cs" />
     <Compile Include="Figures\RectangleFigure.cs" />
+    <Compile Include="SaveFile\Save.cs" />
+    <Compile Include="Strategy\IToStringStrategy.cs" />
     <Compile Include="Strategy\OperationEllipse.cs" />
     <Compile Include="Strategy\OperationRectangle.cs" />
-    <Compile Include="Strategy\Strategy.cs" />
+    <Compile Include="Strategy\IDrawStrategy.cs" />
     <Compile Include="Tools\AbstractTool.cs" />
+    <Compile Include="Tools\PaintTool.cs" />
+    <Compile Include="Tools\DeleteTool.cs" />
     <Compile Include="Tools\DragTool.cs" />
     <Compile Include="Tools\EllipseTool.cs" />
     <Compile Include="Tools\IToolNeedsShape.cs" />
+    <Compile Include="Tools\RectangleBaseTool.cs" />
     <Compile Include="Tools\RectangleTool.cs" />
     <Compile Include="Commands\TempDrawCommand.cs" />
     <Compile Include="Tools\ResizeTool.cs" />
-    <Compile Include="Visitors\DeleteVisitor.cs" />
     <Compile Include="Visitors\DrawVisitor.cs" />
     <Compile Include="Visitors\MoveVisitor.cs" />
+    <Compile Include="Visitors\PaintVisitor.cs" />
     <Compile Include="Visitors\ResizeVisitor.cs" />
     <Compile Include="Visitors\IVisitor.cs" />
     <Compile Include="Visitors\IVisitable.cs" />
+    <Compile Include="Visitors\SaveVisitor.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -121,6 +146,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

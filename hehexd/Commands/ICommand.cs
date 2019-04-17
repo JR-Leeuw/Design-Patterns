@@ -10,7 +10,6 @@ namespace hehexd
     public interface ICommand
     {
         void Execute(DrawingCanvas dc);
-        void Delete(DrawingCanvas dc);
         AbstractFigure returnshape();
     }
 }

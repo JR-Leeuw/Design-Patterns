@@ -22,11 +22,6 @@ namespace hehexd.Commands
             this.end = figure.rEnd();
         }
 
-        public void Delete(DrawingCanvas dc)
-        {
-
-        }
-
         public void Execute(DrawingCanvas dc)
         {
             figure.accept(new ResizeVisitor("e", start, end));
